@@ -53,10 +53,7 @@ class TodoList {
   }
   
   addTodoItem(title, description, dueDate, priority, done) {
-    // if(!(todoItem instanceof TodoItem)) {
-    //   throw new Error('todoItem must be an instance of a TodoItem object')
-    // };
-    let newTodoItem = new TodoItem(title, description, dueDate, priority, done, this.getUid()) // add todoList UUID
+    let newTodoItem = new TodoItem(title, description, dueDate, priority, done, this.getUid())
     
     this.#todoItems.push(newTodoItem);
     return this.getTodoItems();
