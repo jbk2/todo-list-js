@@ -1,6 +1,6 @@
 import TodoItem from "./todo-item";
 
-class Project {
+class TodoList {
   #creationDate;
   #title;
   #description;
@@ -66,4 +66,4 @@ class Project {
   }
 }
 
-export default Project;
+export default TodoList;
