@@ -4,13 +4,15 @@ class TodoItem {
   #dueDate;
   #priority;
   #done;
+  #parentListUid;
 
-  constructor(title, description, dueDate, priority, done) {
+  constructor(title, description, dueDate, priority, done, parentListUid) {
     this.setTitle(title);
     this.setDescription(description);
     this.setDueDate(dueDate);
     this.setPriority(priority);
     this.setDone(done);
+    this.setParentListUid(parentListUid);
   }
 
   setTitle(title) {
@@ -35,10 +37,11 @@ class TodoItem {
   }
   
   setDueDate(dueDate) {
-    if (!(dueDate instanceof Date) || isNaN(dueDate)) {
-      throw new Error('dueDate must be a valid Date object');
+    let date = new Date(dueDate)
+    if (!(date instanceof Date) || isNaN(date)) {
+      throw new Error('dueDate must be in ISO 8601 format (YYYY-MM-DD)');
     }
-    this.#dueDate = dueDate;
+    this.#dueDate = date;
   }
   getDueDate() {
     return this.#dueDate;
@@ -63,6 +66,14 @@ class TodoItem {
   getDone() {
     return this.#done;
   }
+  
+  setParentListUid(uid) {
+    this.#parentListUid = uid;
+  }
+  getParentListUid() {
+    return this.#parentListUid;
+  }
+
 
   toJSON() {
     return {

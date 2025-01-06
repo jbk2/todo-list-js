@@ -2,6 +2,7 @@ import './assets/stylesheets/styles.css'
 import { format } from "date-fns";
 import TodoItem from "./todo-item.js";
 import TodoList from "./todo-list.js";
+import { v7 as uuidv7 } from 'uuid';
 // import './assets/fonts/*'
 // import './assets/images/*'
 
@@ -9,28 +10,27 @@ import TodoList from "./todo-list.js";
 // Projects have ToDo Items
 // ToDo Items have:
 
+const todoListUids = [];
 
-let date = new Date();
-let formattedDate = format(date, "dd/MM/yyyy")
-console.log(formattedDate);
+function createTodoList(title, description) {
+  let uid = uuidv7();
+  let newTodoList = new TodoList(title, description, uid);
+  saveTodoList(newTodoList);
+  todoListUids.push(uid);
+  return newTodoList;
+}
 
-const td1 = new TodoItem("Eggs", "basdf", date, false, false)
-const td2 = new TodoItem("bacon", "basdf", date, false, false)
-const td3 = new TodoItem("toast", "basdf", date, false, false)
-console.log(td1, td2, td3);
+function saveTodoList(newTodoList) {
+  localStorage.setItem(`TodoList-${newTodoList.getTitle()}`, JSON.stringify(newTodoList.toJSON()));
+}
 
-const tdl1 = new TodoList('1st project', 'test project to work on');
 
-tdl1.addTodoItem(td1);
-tdl1.addTodoItem(td2);
-console.log(tdl1.getTodoItems());
-// console.log(`with to do added`, tdl1);
+// SCRIPT:
+const tdl1 = createTodoList('1st project', 'test project to work on');
+console.log('new todo tdl1', tdl1);
 
-// tdl1.removeTodoItem(td1)
-// console.log(`with td1 removed`, tdl1)
-
-localStorage.clear();
-localStorage.setItem(tdl1.getTitle(), JSON.stringify(tdl1.toJSON()));
-
-let storedList = JSON.parse(localStorage.getItem(tdl1.getTitle()));
-console.log("here's my local storage", TodoList.fromJSON(storedList));
+console.log('adding todo item next')
+tdl1.addTodoItem("Eggs", "basdf", "2025-12-31", false, false);
+console.log('tdl1 with a new todoItem', tdl1);
+console.log("tdl1's UID", tdl1.getUid());
+console.log("tdl1's first item's UID", tdl1.getFirstTodoItem().getParentListUid());

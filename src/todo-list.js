@@ -4,18 +4,20 @@ class TodoList {
   #creationDate;
   #title;
   #description;
-  #todoItems;
+  #uid;
+  #todoItems = [];
 
-  constructor(title, description, todoItems = []) {
+  constructor(title, description, uid) {
     this.setCreationDate();
     this.setTitle(title);
     this.setDescription(description);
-    this.setTodoItems(todoItems);
+    this.setUid(uid);
   }
 
   setCreationDate() {
     this.#creationDate = new Date();
   }
+  
   getCreationDate() {
     return this.#creationDate;
   }
@@ -26,6 +28,7 @@ class TodoList {
     }
     this.#title = title;
   }
+
   getTitle() {
     return this.#title;
   }
@@ -36,33 +39,43 @@ class TodoList {
     }
     this.#description = description;
   }
+
   getDescription() {
     return this.#description;
   }
 
-  setTodoItems(todoItems) {
-    if(!(todoItems instanceof Array)) {
-      throw new Error('Todo items must be an Array object instance');
-    }
-    if( !(todoItems.every(i => i instanceof TodoItem)) ) {
-      throw new Error("every item of the TodoItems array must be a TodoItem instance");
-    }
-    this.#todoItems = todoItems;
-  }
-  getTodoItems() {
-    return this.#todoItems;
+  setUid(uid) {
+    this.#uid = uid;
   }
 
-  addTodoItem(todoItem) {
-    if(!(todoItem instanceof TodoItem)) {
-      throw new Error('todoItem must be an instance of a TodoItem object')
-    };
-    this.#todoItems.push(todoItem);
+  getUid() {
+    return this.#uid;
+  }
+  
+  addTodoItem(title, description, dueDate, priority, done) {
+    // if(!(todoItem instanceof TodoItem)) {
+    //   throw new Error('todoItem must be an instance of a TodoItem object')
+    // };
+    let newTodoItem = new TodoItem(title, description, dueDate, priority, done, this.getUid()) // add todoList UUID
+    
+    this.#todoItems.push(newTodoItem);
     return this.getTodoItems();
   }
 
   removeTodoItem(todoItem) {
     this.setTodoItems(this.#todoItems.filter((item) => item !== todoItem))
+  }
+  
+  getTodoItems() {
+    return this.#todoItems;
+  }
+
+  getFirstTodoItem() {
+    return this.#todoItems[0];
+  }
+
+  getLastTodoItem() {
+    return this.#todoItems[-1];
   }
 
   toJSON() {
@@ -84,3 +97,19 @@ class TodoList {
 }
 
 export default TodoList;
+
+// e.g. JSON'ified TodoList object:
+// 
+// { "creationDate":"2025-01-06T15:51:49.610Z",
+//   "title":"1st project",
+//   "description":"test project to work on",
+//   "todoItems":[
+//     {"title":"Eggs","description":"basdf","dueDate":"2025-01-06T15:51:49.608Z","priority":false,"done":false},
+//     {"title":"bacon","description":"basdf","dueDate":"2025-01-06T15:51:49.608Z","priority":false,"done":false}
+//   ]
+// }
+
+// next steps:
+// create List UUID, add parentListId to todoItem when addTodoItem called
+
+// 
