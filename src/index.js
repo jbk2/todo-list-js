@@ -28,3 +28,9 @@ console.log(tdl1.getTodoItems());
 
 // tdl1.removeTodoItem(td1)
 // console.log(`with td1 removed`, tdl1)
+
+localStorage.clear();
+localStorage.setItem(tdl1.getTitle(), JSON.stringify(tdl1.toJSON()));
+
+let storedList = JSON.parse(localStorage.getItem(tdl1.getTitle()));
+console.log("here's my local storage", TodoList.fromJSON(storedList));

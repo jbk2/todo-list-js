@@ -17,6 +17,7 @@ class TodoItem {
     if (typeof title != 'string' || title.trim() === '') {
       throw new Error('Title must be a non-empty string');
     }
+    // MUST VALIDATE AGAINST SAME TITLE ALREADY IN LOCALSTORAGE
     this.#title = title;
   }
   getTitle() {
@@ -61,6 +62,26 @@ class TodoItem {
   }
   getDone() {
     return this.#done;
+  }
+
+  toJSON() {
+    return {
+      title: this.#title,
+      description: this.#description,
+      dueDate: this.#dueDate,
+      priority: this.#priority,
+      done: this.#done
+    };
+  }
+
+  static fromJSON(json) {
+    return new TodoItem(
+      json.title,
+      json.description,
+      new Date(json.dueDate),
+      json.priority,
+      json.done
+    );
   }
 }
 

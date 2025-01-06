@@ -64,6 +64,23 @@ class TodoList {
   removeTodoItem(todoItem) {
     this.setTodoItems(this.#todoItems.filter((item) => item !== todoItem))
   }
+
+  toJSON() {
+    return {
+      creationDate: this.#creationDate.toISOString(),
+      title: this.#title,
+      description: this.#description,
+      todoItems: this.#todoItems.map(item => item.toJSON()),
+    }
+  }
+
+  static fromJSON(json) {
+    return new TodoList(
+      json.title,
+      json.description,
+      json.todoItems.map(item => TodoItem.fromJSON(item))
+    );
+  }
 }
 
 export default TodoList;
