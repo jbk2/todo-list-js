@@ -1,3 +1,21 @@
-h1 {
-  color: blue;
+@font-face {
+  font-family: 'kyiv';
+  src: url('/src/assets/fonts/kyiv-sans.ttf') format('truetype');
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#logo-type {
+  margin-left: 5vw;
+  font-family: 'kyiv';
+  font-variation-settings: "wght" 800, "CONT" 500, "MIDL" -1000;
+  font-size: xx-large;
+}
+
+#search {
+  margin-right: 5vw;
 }
