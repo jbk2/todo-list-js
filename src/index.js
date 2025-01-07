@@ -1,27 +1,38 @@
 import './assets/stylesheets/styles.css'
 import { format } from "date-fns";
+import { v7 as uuidv7 } from 'uuid';
 import TodoItem from "./todo-item.js";
 import TodoList from "./todo-list.js";
-import { v7 as uuidv7 } from 'uuid';
+import todoItemTemplate from './views/partials/_todo-item.html';
+import todoListTemplate from './views/partials/_todo-list.html';
 // import './assets/fonts/*'
 // import './assets/images/*'
 
-// NOTES
-// Projects have ToDo Items
-// ToDo Items have:
-
-const todoListUids = [];
+const todoListUids = new Set();
 
 function createTodoList(title, description) {
-  let uid = uuidv7();
-  let newTodoList = new TodoList(title, description, uid);
-  saveTodoList(newTodoList);
-  todoListUids.push(uid);
-  return newTodoList;
+  let uid;
+  do {
+    uid = `todoList:${uuidv7()}`;
+  } while(todoListUids.has(uid));
+
+  try {
+    const newTodoList = new TodoList(title, description, uid);
+    saveTodoList(newTodoList);
+    todoListUids.add(uid);  
+    return newTodoList;
+  } catch (error) {
+    console.error('Error creating and saving TodoList', error);
+    throw error
+  }
 }
 
 function saveTodoList(newTodoList) {
-  localStorage.setItem(`TodoList-${newTodoList.getTitle()}`, JSON.stringify(newTodoList.toJSON()));
+  localStorage.setItem(`${newTodoList.getUid()}`, JSON.stringify(newTodoList.toJSON()));
+}
+
+function displayTodoLists() {
+
 }
 
 

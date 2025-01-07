@@ -9,7 +9,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Production',
-      template: './src/template.html', // Input html template
+      template: './src/views/template.html', // Input html template
       filename: 'index.html', // Output html file name in the dist/
     }),
   ],
