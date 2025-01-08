@@ -1,21 +1,82 @@
+/* ########################### Typography ##################################### */
 @font-face {
   font-family: 'kyiv';
   src: url('/src/assets/fonts/kyiv-sans.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'anybody';
+  src: url('/src/assets/fonts/anybody.ttf') format('truetype');
+}
+
+h1 {
+  font-variation-settings: 'wght' 800, 'wdth' 100, 'ital' 0;
+  font-size: xx-large;
+}
+
+h2 {
+  font-variation-settings: 'wght' 700, 'wdth' 100, 'ital' 0;
+  font-size: x-large;
+}
+
+h3 {
+  font-variation-settings: 'wght' 600, 'wdth' 100, 'ital' 0;
+  font-size: x-large;
+}
+
+h4 {
+  font-variation-settings: 'wght' 600, 'wdth' 100, 'ital' 0;
+  font-size: large;
+}
+
+p {
+  font-variation-settings: 'wght' 380, 'wdth' 105, 'ital' 0;
+  font-size: small;
+}
+
+/* ########################### Navbar ##################################### */
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100vw;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 #logo-type {
-  margin-left: 5vw;
+  flex: 1;
+  text-align: center;
   font-family: 'kyiv';
   font-variation-settings: "wght" 800, "CONT" 500, "MIDL" -1000;
-  font-size: xx-large;
+  font-size: 2.8rem;
 }
 
 #search {
-  margin-right: 5vw;
+  flex: 0;
 }
+
+/* ########################### Main ##################################### */
+main {
+  font-family: 'anybody';
+  font-variation-settings: 'wght' 400, 'wdth' 100, 'ital' 0;
+  display: grid;
+  grid-template-columns: 20vw 80vw;
+  grid-template-rows: 100vh;
+}
+
+
+/* ########################### Sidebar Left ##################################### */
+#sidebar-left {
+  background-color: lightgray;
+  padding: 1rem;
+}
+
+
+
+/* ########################### Main content ##################################### */
+#content {
+  background-color: palegoldenrod;
+  padding: 1rem;
+}
+
