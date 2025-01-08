@@ -31,17 +31,51 @@ function saveTodoList(newTodoList) {
   localStorage.setItem(`${newTodoList.getUid()}`, JSON.stringify(newTodoList.toJSON()));
 }
 
-function displayTodoLists() {
+function deleteTodoList() {
+  // delete from todoListUIDs
+  // delete from localStorage
+}
 
+function buildTodoList(listObject) {
+  console.log('heres the list passed into build list', listObject);
+  let listObjectData = {
+    uid: listObject.getUid(),
+    title: listObject.getTitle(),
+    description: listObject.getDescription()
+  }
+  let populatedList = todoListTemplate
+
+  Object.keys(listObjectData).forEach((key) => {
+    const regex = new RegExp(`{{${key}}}`, 'g')
+    populatedList = populatedList.replace(regex, listObjectData[key])
+  })
+
+  return populatedList
+}
+
+function displayTodoLists() {
+  const listsContainer = document.getElementById('todo-lists-container')
+  
+  todoListUids.forEach((uid) => {
+    const listObject = TodoList.fromJSON(JSON.parse(localStorage.getItem(uid)));
+    listsContainer.insertAdjacentHTML('beforeend', buildTodoList(listObject));
+  });
 }
 
 
 // SCRIPT:
 const tdl1 = createTodoList('1st project', 'test project to work on');
-console.log('new todo tdl1', tdl1);
-
-console.log('adding todo item next')
 tdl1.addTodoItem("Eggs", "basdf", "2025-12-31", false, false);
-console.log('tdl1 with a new todoItem', tdl1);
-console.log("tdl1's UID", tdl1.getUid());
-console.log("tdl1's first item's UID", tdl1.getFirstTodoItem().getParentListUid());
+tdl1.addTodoItem("Bacon", "basdf", "2025-11-27", false, false);
+
+const tdl2 = createTodoList('2nd project', 'another test project to work on');
+tdl2.addTodoItem("Corn flakes", "basdf", "2025-11-27", false, false);
+tdl2.addTodoItem("Milk", "basdf", "2025-11-27", false, false);
+// console.log('new todo tdl2', tdl2);
+
+
+// console.log("tdl1's UID", tdl1.getUid());
+// console.log("tdl1's first item's UID", tdl1.getFirstTodoItem().getParentListUid());
+
+console.log('now to display the todolist in the ui')
+displayTodoLists();

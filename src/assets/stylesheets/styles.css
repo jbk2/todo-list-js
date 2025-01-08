@@ -29,6 +29,11 @@ h4 {
   font-size: large;
 }
 
+h5 {
+  font-variation-settings: 'wght' 550, 'wdth' 100, 'ital' 0;
+  font-size: medium;
+}
+
 p {
   font-variation-settings: 'wght' 380, 'wdth' 105, 'ital' 0;
   font-size: small;
@@ -79,4 +84,76 @@ main {
   background-color: palegoldenrod;
   padding: 1rem;
 }
+
+/* ########################### Todo Lists ##################################### */
+
+#todo-lists-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.todo-list-card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  max-width: 16rem;
+  max-height: 30rem;
+}
+
+.todo-list-card > p,
+.todo-list-card > h1,
+.todo-list-card > h2,
+.todo-list-card > h3,
+.todo-list-card > h4,
+.todo-list-card > h5 {
+  margin: 0;
+  display: inline-block;
+}
+
+/* must js detect over flow and if so add pointer and add */
+/* ::after element with full content */
+.todo-list-card > p {
+  margin-top: 0.2rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
+
+ul.todo-items-container {
+  margin: 0;
+  margin-top: 0.5rem;
+  padding: 0;
+}
+
+li.todo-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  list-style: none;
+  padding: 0.3rem;
+}
+
+li.todo-item > input,
+li.todo-item > p {
+  margin: 0;
+  padding: 0;
+}
+
+li.todo-item > label {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 0.4rem;
+}
+
+p.due-date {
+  margin-left: auto;
+  padding-left: 0.2rem;
+  text-align: right;
+  color: grey;
+}
+
 

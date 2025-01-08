@@ -14,8 +14,8 @@ class TodoList {
     this.setUid(uid);
   }
 
-  setCreationDate() {
-    this.#creationDate = new Date();
+  setCreationDate(creationDate = new Date()) {
+    this.#creationDate = creationDate;
   }
   
   getCreationDate() {
@@ -80,16 +80,20 @@ class TodoList {
       creationDate: this.#creationDate.toISOString(),
       title: this.#title,
       description: this.#description,
+      uid: this.#uid,
       todoItems: this.#todoItems.map(item => item.toJSON()),
     }
   }
 
   static fromJSON(json) {
-    return new TodoList(
+    let todo = new TodoList(
       json.title,
       json.description,
       json.todoItems.map(item => TodoItem.fromJSON(item))
     );
+    todo.setUid(json.uid), todo.setCreationDate(new Date(json.creationDate))
+
+    return todo;
   }
 }
 
