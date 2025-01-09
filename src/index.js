@@ -12,7 +12,7 @@ window.TodoList = TodoList;
 window.TodoItem = TodoItem;
 window.createTodoList = createTodoList;
 window.saveTodoList = saveTodoList;
-window.buildTodoList = buildTodoList;
+window.buildTodoListHtml = buildTodoListHtml;
 window.displayTodoLists = displayTodoLists;
 window.addTodoItem = addTodoItem;
 
@@ -27,7 +27,8 @@ function createTodoList(title, description) {
   try {
     const newTodoList = new TodoList(title, description, uid);
     saveTodoList(newTodoList);
-    todoListUids.add(uid);  
+    todoListUids.add(uid);
+    console.log("here's todoListUids array", todoListUids);
     return newTodoList;
   } catch (error) {
     console.error('Error creating and saving TodoList', error);
@@ -44,21 +45,21 @@ function deleteTodoList() {
   // delete from localStorage
 }
 
-function buildTodoList(listObject) {
-  console.log('heres the list passed into build list', listObject);
+function buildTodoListHtml(listObject) {
+  // console.log('heres the list passed into build list', listObject);
   let listObjectData = {
     uid: listObject.getUid(),
     title: listObject.getTitle(),
     description: listObject.getDescription()
   }
-  let populatedList = todoListTemplate
+  let populatedListHtml = todoListTemplate
 
   Object.keys(listObjectData).forEach((key) => {
     const regex = new RegExp(`{{${key}}}`, 'g')
-    populatedList = populatedList.replace(regex, listObjectData[key])
+    populatedListHtml = populatedListHtml.replace(regex, listObjectData[key])
   })
 
-  return populatedList
+  return populatedListHtml
 }
 
 function displayTodoLists() {
@@ -68,29 +69,37 @@ function displayTodoLists() {
   
   todoListUids.forEach((uid) => {
     const listObject = TodoList.fromJSON(JSON.parse(localStorage.getItem(uid)));
-    listsContainer.insertAdjacentHTML('beforeend', buildTodoList(listObject));
+    listsContainer.insertAdjacentHTML('beforeend', buildTodoListHtml(listObject));
   });
 }
 
 function addTodoItem(todoList, title, description, dueDate, priority, done) {
   todoList.addTodoItem(title, description, dueDate, priority, done)
   updateStorage(todoList);
-  displayTodoLists();
+  refreshListInUi(todoList)
 }
 
 function updateStorage(todoList) {
   let uid = todoList.getUid();
-  console.log('heres the uid;', uid)
-  localStorage.removeItem(uid);
   localStorage.setItem(uid, JSON.stringify(todoList.toJSON()))
 }
 
-
+function refreshListInUi(todoList) {
+  let listUiElement = document.getElementById(todoList.getUid());
+  let listHtml = buildTodoListHtml(todoList)
+  
+  if (listUiElement) { // if list already in UI update it
+    listUiElement.innerHTML = listHtml;
+  } else { // if we've not displayed the list yet then display it
+    const listsContainer = document.getElementById('todo-lists-container')
+    listsContainer.insertAdjacentHTML('beforeend', listHtml);
+  }
+}
 
 // SCRIPT:
 const tdl1 = createTodoList('1st project', 'test project to work on');
-tdl1.addTodoItem("Eggs", "basdf", "2025-12-31", false, false);
-tdl1.addTodoItem("Bacon", "basdf", "2025-11-27", false, false);
+addTodoItem(tdl1, "Eggs", "basdf", "2025-12-31", false, false);
+addTodoItem(tdl1, "Bacon", "basdf", "2025-11-27", false, false);
 
 const tdl2 = createTodoList('2nd project', 'another test project to work on');
 addTodoItem(tdl2, "Corn flakes", "basdf", "2025-11-27", false, false);

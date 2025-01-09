@@ -100,7 +100,7 @@ main {
 #todo-lists-container {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;;
+  margin-top: 0.8rem;
 }
 
 button#new-todo-list {
