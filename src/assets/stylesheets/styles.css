@@ -87,9 +87,30 @@ main {
 
 /* ########################### Todo Lists ##################################### */
 
+#content-header {
+  display: flex;
+  align-items: center;
+  /* margin-top: 1.4rem;; */
+}
+
+#content-title {
+  /* margin: 0; */
+}
+
 #todo-lists-container {
   display: flex;
   gap: 1rem;
+  margin-top: 1rem;;
+}
+
+button#new-todo-list {
+  border: 1px solid green;
+  margin-left: 1.2rem;
+  border-radius: 0.5rem;
+  width: 2.2rem;
+  /* height: 1.4rem; */
+  font-size: x-large;
+  background-color: rgb(26, 211, 26);
 }
 
 .todo-list-card {
