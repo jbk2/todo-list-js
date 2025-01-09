@@ -8,6 +8,13 @@ import todoListTemplate from './views/partials/_todo-list.html';
 // import './assets/fonts/*'
 // import './assets/images/*'
 
+window.TodoList = TodoList;
+window.TodoItem = TodoItem;
+window.createTodoList = createTodoList;
+window.saveTodoList = saveTodoList;
+window.buildTodoList = buildTodoList;
+window.displayTodoLists = displayTodoLists;
+
 const todoListUids = new Set();
 
 function createTodoList(title, description) {
