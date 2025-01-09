@@ -14,6 +14,7 @@ window.createTodoList = createTodoList;
 window.saveTodoList = saveTodoList;
 window.buildTodoList = buildTodoList;
 window.displayTodoLists = displayTodoLists;
+window.addTodoItem = addTodoItem;
 
 const todoListUids = new Set();
 
@@ -62,12 +63,28 @@ function buildTodoList(listObject) {
 
 function displayTodoLists() {
   const listsContainer = document.getElementById('todo-lists-container')
+  listsContainer.innerHTML = '';
+
   
   todoListUids.forEach((uid) => {
     const listObject = TodoList.fromJSON(JSON.parse(localStorage.getItem(uid)));
     listsContainer.insertAdjacentHTML('beforeend', buildTodoList(listObject));
   });
 }
+
+function addTodoItem(todoList, title, description, dueDate, priority, done) {
+  todoList.addTodoItem(title, description, dueDate, priority, done)
+  updateStorage(todoList);
+  displayTodoLists();
+}
+
+function updateStorage(todoList) {
+  let uid = todoList.getUid();
+  console.log('heres the uid;', uid)
+  localStorage.removeItem(uid);
+  localStorage.setItem(uid, JSON.stringify(todoList.toJSON()))
+}
+
 
 
 // SCRIPT:
@@ -76,8 +93,8 @@ tdl1.addTodoItem("Eggs", "basdf", "2025-12-31", false, false);
 tdl1.addTodoItem("Bacon", "basdf", "2025-11-27", false, false);
 
 const tdl2 = createTodoList('2nd project', 'another test project to work on');
-tdl2.addTodoItem("Corn flakes", "basdf", "2025-11-27", false, false);
-tdl2.addTodoItem("Milk", "basdf", "2025-11-27", false, false);
+addTodoItem(tdl2, "Corn flakes", "basdf", "2025-11-27", false, false);
+addTodoItem(tdl2, "Milk", "basdf", "2025-11-27", false, false);
 // console.log('new todo tdl2', tdl2);
 
 
