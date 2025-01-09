@@ -85,11 +85,11 @@ function updateStorage(todoList) {
 }
 
 function refreshListInUi(todoList) {
-  let listUiElement = document.getElementById(todoList.getUid());
+  let listUiElement = document.querySelector(`[data-list-uid="${todoList.getUid()}"]`);
   let listHtml = buildTodoListHtml(todoList)
   
   if (listUiElement) { // if list already in UI update it
-    listUiElement.innerHTML = listHtml;
+    listUiElement.outerHTML = listHtml;
   } else { // if we've not displayed the list yet then display it
     const listsContainer = document.getElementById('todo-lists-container')
     listsContainer.insertAdjacentHTML('beforeend', listHtml);
