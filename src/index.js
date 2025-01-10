@@ -46,7 +46,6 @@ function deleteTodoList() {
 }
 
 function buildTodoListHtml(listObject) {
-  // console.log('heres the list passed into build list', listObject);
   let listObjectData = {
     uid: listObject.getUid(),
     title: listObject.getTitle(),
@@ -68,16 +67,9 @@ function buildTodoListHtml(listObject) {
     let todoItemHtml = buildTodoItemHtml(todoItem);
     // console.log("HERES TODOITEM HTML", todoItemHtml);
     todoItemsString = todoItemsString.concat(todoItemHtml);
-    console.log("HERES TODOITEMSSTRING HTML", todoItemsString);
   })
 
-  console.log("222HERES TODOITEMSSTRING HTML", todoItemsString);
-  // console.log("HERES POPULATEDLISTHTML HTML", populatedListHtml);
-  
   populatedListHtml = populatedListHtml.replace('{{todoItems}}', todoItemsString);
-  console.log("HERES updated POPULATEDLISTHTML HTML", populatedListHtml);
-  // console.log("HERES Todo items string", todoItemsString);
-  // console.log("Here's all of the list string after buid::", populatedListHtml)
   return populatedListHtml
 }
 
@@ -103,7 +95,6 @@ function buildTodoItemHtml(todoItem) {
       }
     }
   })
-  // console.log("Here's built Item html", populatedItemHtml);
   return populatedItemHtml;
 }
 
@@ -113,12 +104,7 @@ function displayTodoLists() {
 
   
   todoListUids.forEach((uid) => {
-    console.log("HERE'S UID", uid);
-    console.log("HERE'S localStorage obj", localStorage.getItem(uid))
-    console.log("HERE'S localStorage objs todoItems", JSON.parse(localStorage.getItem(uid)).todoItems)
     const listObject = TodoList.fromJSON(JSON.parse(localStorage.getItem(uid)));
-    console.log("HERE'S Built LIST OBJECT ", listObject)
-    console.log("HERE'S Built LIST OBJECT's Items ", listObject.getTodoItems())
     listsContainer.insertAdjacentHTML('beforeend', buildTodoListHtml(listObject));
   });
 }
@@ -151,9 +137,9 @@ const tdl1 = createTodoList('1st project', 'test project to work on');
 addTodoItem(tdl1, "Eggs", "basdf", "2025-12-31", true, false);
 addTodoItem(tdl1, "Bacon", "basdf", "2025-11-27", false, true);
 
-// const tdl2 = createTodoList('2nd project', 'another test project to work on');
-// addTodoItem(tdl2, "Corn flakes", "basdf", "2025-11-27", false, false);
-// addTodoItem(tdl2, "Milk", "basdf", "2025-11-27", false, true);
+const tdl2 = createTodoList('2nd project', 'another test project to work on');
+addTodoItem(tdl2, "Corn flakes", "basdf", "2025-11-27", false, false);
+addTodoItem(tdl2, "Milk", "basdf", "2025-11-27", false, true);
 // console.log('new todo tdl2', tdl2);
 
 
