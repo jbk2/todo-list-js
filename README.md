@@ -16,6 +16,9 @@ Clone this repo, change the "name" in package.json, then run `npm install` to in
 
 
 ## ToDo's
+- Enable update of todoItem.#done on checkbox click
+- Enable update of todoItem.#title on title click
+- Add delete todoItem button
 
 - Create #updateTodoList() - to update either list or listItems:
   - must update localStorage object
@@ -28,3 +31,8 @@ Clone this repo, change the "name" in package.json, then run `npm install` to in
 - Add a delete todoList button
   - must remove the list from the Dom
   - must remove the list from localStorage
+
+- Add a clickable list title index in sidebar
+
+- Build a full list modal view, accessible by clicking on list body.
+- Enable expansion of todoItem, by clicking on todoItem title.

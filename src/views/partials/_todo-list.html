@@ -3,5 +3,12 @@
   <p>{{description}}</p>
   <ul class="todo-items-container">
     {{todoItems}}
+    <li id="new-todo-item">
+      <form action="create" id="new-todo-item-form">
+        <input type="checkbox" id="new-todo-item-done">
+        <input type="text" id="new-todo-item-title" placeholder="new Todo Item title">
+        <input type="date" id="new-todo-item-due-date">
+      </form>
+    </li>
   </ul>
 </section>

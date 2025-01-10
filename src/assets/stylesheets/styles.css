@@ -146,7 +146,7 @@ ul.todo-items-container {
   padding: 0;
 }
 
-li.todo-item {
+li.todo-item, li#new-todo-item {
   display: flex;
   width: 100%;
   align-items: center;
@@ -155,18 +155,15 @@ li.todo-item {
 }
 
 li.todo-item > input,
-li.todo-item > p {
+li.todo-item > p,
+input#new-todo-item-done {
   margin: 0;
   padding: 0;
 }
 
 li.todo-item > input[type="checkbox"]:checked ~ label {
   opacity: 0.4;
-  /* transform: scale(1.005); */
-}
-
-li.todo-item > label {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  text-decoration: line-through;
 }
 
 li.todo-item > label {
@@ -189,5 +186,33 @@ p.due-date {
   margin-left: 0.3rem;
   font-size: small;
 }
+
+
+/* ########################### New Todo Item Form ##################################### */
+input#new-todo-item-title {
+  border: none;
+  border-bottom: 1px dotted gray;
+  margin-left: 0.5rem;
+  font-family: 'anybody';
+  font-variation-settings: 'wght' 400, 'wdth' 100, 'ital' 0;
+  opacity: 0.7;
+  padding-left: 0.3rem;
+}
+
+input#new-todo-item-title::placeholder {
+  font-family: 'anybody';
+  font-variation-settings: 'wght' 400, 'wdth' 100, 'ital' 100;
+}
+
+input#new-todo-item-due-date {
+  max-width: 1rem;
+  margin-left: auto;
+}
+
+#new-todo-item-form {
+  display: flex;
+  width: 100vw;
+}
+
 
 
