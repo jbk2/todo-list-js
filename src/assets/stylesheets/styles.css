@@ -106,6 +106,7 @@ button#new-todo-list {
   font-size: x-large;
   background-color: rgb(26, 211, 26);
   cursor: pointer;
+  opacity: 0.8;
 }
 
 .todo-list-card {
@@ -220,7 +221,7 @@ input#new-todo-item-title::placeholder {
 
 #checkbox-container #checkmark {
   opacity: 0.3;
-  filter: grayscale(5%);
+  filter: grayscale(15%);
   transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
   cursor: pointer;
   display: inline-block;
@@ -235,6 +236,7 @@ input#new-todo-item-title::placeholder {
 input#new-todo-item-due-date {
   width: 1.1rem;
   margin-left: 0.3rem;
+  opacity: 0.6;
 }
 
 #new-todo-item-form {
@@ -249,6 +251,7 @@ button#new-todo-item-submit {
   width: 1.4rem;
   font-size: x-small;
   background-color: rgb(26, 211, 26);
+  opacity: 0.85;
   cursor: pointer;
 
 }

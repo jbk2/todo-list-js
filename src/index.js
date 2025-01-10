@@ -47,17 +47,14 @@ function deleteTodoList() {
 
 function buildTodoListHtml(listObject) {
   let listObjectData = {
-    uid: listObject.getUid(),
-    title: listObject.getTitle(),
-    description: listObject.getDescription(),
-    todoItems: listObject.getTodoItems()
+    uid: listObject.getUid(), title: listObject.getTitle(),
+    description: listObject.getDescription(), todoItems: listObject.getTodoItems()
   }
   let populatedListHtml = todoListTemplate
   
   Object.keys(listObjectData).forEach((key) => {
     if (key != 'todoItems') {
-      const regex = new RegExp(`{{${key}}}`, 'g')
-      populatedListHtml = populatedListHtml.replace(regex, listObjectData[key])
+      populatedListHtml = populatedListHtml.replace(new RegExp(`{{${key}}}`, 'g'), listObjectData[key])
     }
   })
   
@@ -65,7 +62,6 @@ function buildTodoListHtml(listObject) {
 
   listObjectData.todoItems.forEach((todoItem) => {
     let todoItemHtml = buildTodoItemHtml(todoItem);
-    // console.log("HERES TODOITEM HTML", todoItemHtml);
     todoItemsString = todoItemsString.concat(todoItemHtml);
   })
 
@@ -76,14 +72,13 @@ function buildTodoListHtml(listObject) {
 function buildTodoItemHtml(todoItem) {
   let itemObjectData = {
     title: todoItem.getTitle(), description: todoItem.getDescription(),
-    dueDate: format(todoItem.getDueDate(), 'dd.MM.yy'), priority: todoItem.getPriority(),
+    dueDate: format(new Date(todoItem.getDueDate()), 'dd.MM.yy'), priority: todoItem.getPriority(),
     done: todoItem.getDone(), parentListUid: todoItem.getParentListUid() 
   }
   let populatedItemHtml = todoItemTemplate
 
   Object.keys(itemObjectData).forEach((key) => {
-    const regex = new RegExp(`{{${key}}}`, 'g')
-    populatedItemHtml = populatedItemHtml.replace(regex, itemObjectData[key])
+    populatedItemHtml = populatedItemHtml.replace(new RegExp(`{{${key}}}`, 'g'), itemObjectData[key])
     if (key === 'done') {
       populatedItemHtml = itemObjectData[key]
         ? populatedItemHtml.replace('{{checked}}', 'checked')
@@ -140,11 +135,6 @@ addTodoItem(tdl1, "Bacon", "basdf", "2025-11-27", false, true);
 const tdl2 = createTodoList('2nd project', 'another test project to work on');
 addTodoItem(tdl2, "Corn flakes", "basdf", "2025-11-27", false, false);
 addTodoItem(tdl2, "Milk", "basdf", "2025-11-27", false, true);
-// console.log('new todo tdl2', tdl2);
-
-
-// console.log("tdl1's UID", tdl1.getUid());
-// console.log("tdl1's first item's UID", tdl1.getFirstTodoItem().getParentListUid());
 
 console.log('now to display the todolist in the ui')
-displayTodoLists();
+// displayTodoLists();

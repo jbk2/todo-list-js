@@ -37,9 +37,9 @@ class TodoItem {
   }
   
   setDueDate(dueDate) {
-    let date = new Date(dueDate)
-    if (!(date instanceof Date) || isNaN(date)) {
-      throw new Error('dueDate must be in ISO 8601 format (YYYY-MM-DD)');
+    let date = dueDate instanceof Date ? dueDate : new Date(dueDate);
+    if (isNaN(date.getTime())) {
+      throw new Error('dueDate must be a valid date (ISO 8601 format or Date object).');
     }
     this.#dueDate = date;
   }
