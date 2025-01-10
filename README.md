@@ -36,3 +36,7 @@ Clone this repo, change the "name" in package.json, then run `npm install` to in
 
 - Build a full list modal view, accessible by clicking on list body.
 - Enable expansion of todoItem, by clicking on todoItem title.
+
+## Imminent ToDo's
+- refactor tidy & shorten index.js
+- write event listener for add new todoItem and complete that functionality
