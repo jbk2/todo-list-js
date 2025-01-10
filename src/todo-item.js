@@ -81,7 +81,8 @@ class TodoItem {
       description: this.#description,
       dueDate: this.#dueDate,
       priority: this.#priority,
-      done: this.#done
+      done: this.#done,
+      parentListUid: this.#parentListUid
     };
   }
 
@@ -91,7 +92,8 @@ class TodoItem {
       json.description,
       new Date(json.dueDate),
       json.priority,
-      json.done
+      json.done,
+      json.parentListUid
     );
   }
 }

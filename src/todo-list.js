@@ -89,9 +89,10 @@ class TodoList {
     let todo = new TodoList(
       json.title,
       json.description,
-      json.todoItems.map(item => TodoItem.fromJSON(item))
+      json.uid
     );
-    todo.setUid(json.uid), todo.setCreationDate(new Date(json.creationDate))
+    todo.setCreationDate(new Date(json.creationDate));
+    todo.#todoItems = json.todoItems.map(item => TodoItem.fromJSON(item));
 
     return todo;
   }

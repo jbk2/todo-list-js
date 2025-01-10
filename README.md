@@ -13,3 +13,18 @@ This is a template webpack project setup with the following packages:
 
 ## Usage
 Clone this repo, change the "name" in package.json, then run `npm install` to install the dependencies.
+
+
+## ToDo's
+
+- Create #updateTodoList() - to update either list or listItems:
+  - must update localStorage object
+  - must re-render the updated list
+
+- Add a delete todoItem button to each todoItem:
+  - must remove the item from the list in the Dom
+  - must remove the item from the list in localStorage
+
+- Add a delete todoList button
+  - must remove the list from the Dom
+  - must remove the list from localStorage
