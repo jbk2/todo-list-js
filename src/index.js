@@ -10,7 +10,6 @@ window.TodoList = TodoList;
 window.TodoItem = TodoItem;
 window.createTodoList = createTodoList;
 window.saveTodoList = saveTodoList;
-
 window.addTodoItem = addTodoItem;
 
 const todoListUids = new Set();
@@ -26,6 +25,7 @@ function createTodoList(title, description) {
     saveTodoList(newTodoList);
     todoListUids.add(uid);
     console.log("here's todoListUids array", todoListUids);
+    display.displayTodoList(newTodoList)
     return newTodoList;
   } catch (error) {
     console.error('Error creating and saving TodoList', error);
@@ -42,10 +42,11 @@ function deleteTodoList() {
   // delete from localStorage
 }
 
-function addTodoItem(todoList, title, description, dueDate, priority, done) {
-  todoList.addTodoItem(title, description, dueDate, priority, done)
+function addTodoItem(todoListUid, title, description, dueDate, priority, done) {
+  const todoList = TodoList.fromJSON(JSON.parse(localStorage.getItem(todoListUid)));
+  const newTodoItem = todoList.addTodoItem(title, description, dueDate, priority, done)
   updateStorage(todoList);
-  display.refreshListInUi(todoList)
+  display.displayTodoItem(newTodoItem)
 }
 
 function updateStorage(todoList) {
@@ -53,16 +54,13 @@ function updateStorage(todoList) {
   localStorage.setItem(uid, JSON.stringify(todoList.toJSON()))
 }
 
-
+export { addTodoItem };
 
 // SCRIPT:
 const tdl1 = createTodoList('1st project', 'test project to work on');
-addTodoItem(tdl1, "Eggs", "basdf", "2025-12-31", true, false);
-addTodoItem(tdl1, "Bacon", "basdf", "2025-11-27", false, true);
+addTodoItem(tdl1.getUid(), "Eggs", "basdf", "2025-12-31", true, false);
+addTodoItem(tdl1.getUid(), "Bacon", "basdf", "2025-11-27", false, true);
 
 const tdl2 = createTodoList('2nd project', 'another test project to work on');
-addTodoItem(tdl2, "Corn flakes", "basdf", "2025-11-27", false, false);
-addTodoItem(tdl2, "Milk", "basdf", "2025-11-27", false, true);
-
-console.log('now to display the todolist in the ui')
-display.displayTodoLists(todoListUids);
+// addTodoItem(tdl2.getUid(), "Corn flakes", "basdf", "2025-11-27", false, false);
+// addTodoItem(tdl2.getUid(), "Milk", "basdf", "2025-11-27", false, true);

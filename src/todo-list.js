@@ -54,9 +54,8 @@ class TodoList {
   
   addTodoItem(title, description, dueDate, priority, done) {
     let newTodoItem = new TodoItem(title, description, dueDate, priority, done, this.getUid())
-    
     this.#todoItems.push(newTodoItem);
-    return this.getTodoItems();
+    return newTodoItem;
   }
 
   removeTodoItem(todoItem) {

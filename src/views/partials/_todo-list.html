@@ -3,17 +3,6 @@
   <p>{{description}}</p>
   <ul class="todo-items-container">
     {{todoItems}}
-    <li id="new-todo-item">
-      <form action="#" id="new-todo-item-form">
-        <input type="hidden" name="parent-todo-list-uid" value="{{uid}}">
-        <input type="text" id="new-todo-item-title" placeholder="new Todo Item title">
-        <label id="checkbox-container" title="Priority item?">
-          <input type="checkbox" id="new-todo-item-done">
-          <span id="checkmark">⭐</span>
-        </label>
-        <input type="date" id="new-todo-item-due-date">
-        <button id="new-todo-item-submit" title="Add new TodoList">+</button>
-      </form>
-    </li>
+    {{newTodoItemForm}}
   </ul>
 </section>

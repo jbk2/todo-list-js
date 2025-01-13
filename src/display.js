@@ -1,26 +1,26 @@
 import { format } from "date-fns";
+import { addTodoItem } from './index.js';
 import todoItemTemplate from './views/partials/_todo-item.html';
 import todoListTemplate from './views/partials/_todo-list.html';
-
+import newTodoItemFormTemplate from './views/partials/_new-todo-item-form.html';
 window.buildTodoListHtml = buildTodoListHtml;
-window.displayTodoLists = displayTodoLists;
 
-function buildTodoListHtml(listObject) {
-  let listObjectData = {
-    uid: listObject.getUid(), title: listObject.getTitle(),
-    description: listObject.getDescription(), todoItems: listObject.getTodoItems()
+function buildTodoListHtml(todoListObject) {
+  let populatedListHtml = todoListTemplate.replace('{{newTodoItemForm}}', newTodoItemFormTemplate)
+  let todoListObjectData = {
+    uid: todoListObject.getUid(), title: todoListObject.getTitle(),
+    description: todoListObject.getDescription(), todoItems: todoListObject.getTodoItems()
   }
-  let populatedListHtml = todoListTemplate
   
-  Object.keys(listObjectData).forEach((key) => {
+  Object.keys(todoListObjectData).forEach((key) => {
     if (key != 'todoItems') {
-      populatedListHtml = populatedListHtml.replace(new RegExp(`{{${key}}}`, 'g'), listObjectData[key])
+      populatedListHtml = populatedListHtml.replace(new RegExp(`{{${key}}}`, 'g'), todoListObjectData[key])
     }
   })
   
   let todoItemsString = '';
 
-  listObjectData.todoItems.forEach((todoItem) => {
+  todoListObjectData.todoItems.forEach((todoItem) => {
     let todoItemHtml = buildTodoItemHtml(todoItem);
     todoItemsString = todoItemsString.concat(todoItemHtml);
   })
@@ -53,28 +53,41 @@ function buildTodoItemHtml(todoItem) {
   return populatedItemHtml;
 }
 
-function displayTodoLists(todoListUids) {
+function displayTodoList(todoList) {
   const listsContainer = document.getElementById('todo-lists-container')
-  listsContainer.innerHTML = '';
-
-  
-  todoListUids.forEach((uid) => {
-    const listObject = TodoList.fromJSON(JSON.parse(localStorage.getItem(uid)));
-    listsContainer.insertAdjacentHTML('beforeend', buildTodoListHtml(listObject));
-  });
+  listsContainer.insertAdjacentHTML('beforeend', buildTodoListHtml(todoList));
 }
 
-function refreshListInUi(todoList) {
-  let listUiElement = document.querySelector(`[data-list-uid="${todoList.getUid()}"]`);
-  let listHtml = buildTodoListHtml(todoList)
-  
-  if (listUiElement) { // if list already in UI update it
-    listUiElement.outerHTML = listHtml;
-  } else { // if we've not displayed the list yet then display it
-    const listsContainer = document.getElementById('todo-lists-container')
-    listsContainer.insertAdjacentHTML('beforeend', listHtml);
-  }
+function displayTodoItem(todoItem) {
+  const newItemString = buildTodoItemHtml(todoItem);
+  const parser = new DOMParser
+  const htmlDoc = parser.parseFromString(newItemString, 'text/html');
+  const newTodoItemEl = htmlDoc.body.firstElementChild;
+  const parentListItemsContainer
+    = document.querySelector(`[data-list-uid="${todoItem.getParentListUid()}"] ul.todo-items-container`);
+  const newItemFormLi = parentListItemsContainer.querySelector('.new-todo-item');
+  parentListItemsContainer.insertBefore(newTodoItemEl, newItemFormLi);
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const newTodoItemForms = document.querySelectorAll('.new-todo-item');
 
-export const display = { buildTodoListHtml, buildTodoItemHtml, displayTodoLists, refreshListInUi };
+  newTodoItemForms.forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const parentTodoListUid = formData.get('parent-todo-list-uid');
+      const itemTitle = formData.get('title');
+      const itemDescription = '';
+      const itemDueDate = formData.get('due-date');
+      const itemPriority = formData.has('priority') ? true : false;
+      const itemDone = false;
+
+      addTodoItem(parentTodoListUid, itemTitle, itemDescription, itemDueDate, itemPriority, itemDone);
+      event.target.reset();
+    })
+  })
+
+})
+
+export const display = { buildTodoListHtml, buildTodoItemHtml, displayTodoList, displayTodoItem };

@@ -27,9 +27,10 @@ class TodoItem {
   }
 
   setDescription(description) {
-    if (typeof description != 'string' || description.trim() === '' || description.length < 4) {
-      throw new Error('Description must be a non-empty string of more than 4 chars');
-    }
+    //  allow anything as description, field rarely used.
+    // if (typeof description != 'string' || description.trim() === '' || description.length < 4) {
+    //   throw new Error('Description must be a non-empty string of more than 4 chars');
+    // }
     this.#description = description;
   }
   getDescription() {
@@ -37,6 +38,8 @@ class TodoItem {
   }
   
   setDueDate(dueDate) {
+    // If not date submitted just hard code a placeholder date
+    if (dueDate === null || dueDate === '') { dueDate = new Date('2030-01-31')}
     let date = dueDate instanceof Date ? dueDate : new Date(dueDate);
     if (isNaN(date.getTime())) {
       throw new Error('dueDate must be a valid date (ISO 8601 format or Date object).');
