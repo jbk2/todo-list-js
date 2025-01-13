@@ -40,3 +40,4 @@ Clone this repo, change the "name" in package.json, then run `npm install` to in
 ## Imminent ToDo's
 - refactor tidy & shorten index.js
 - write event listener for add new todoItem and complete that functionality
+- write event listener for add new todoList and complete that functionality
