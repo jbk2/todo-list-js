@@ -42,6 +42,17 @@ function deleteTodoList() {
   // delete from localStorage
 }
 
+function deleteTodoItem(parentUid, itemTitle) {
+  // remove from TodoList.#todoItems
+  const todoList = TodoList.fromJSON(JSON.parse(localStorage.getItem(parentUid)));
+  const todoItem = todoList.findTodoItem(itemTitle)
+  todoList.removeTodoItem(todoItem);
+  // update localStorage with todoList with updated TodoList.#todoitems
+  saveTodoList(todoList)
+  // remove from the UI
+  
+}
+
 function addTodoItem(todoListUid, title, description, dueDate, priority, done) {
   const todoList = TodoList.fromJSON(JSON.parse(localStorage.getItem(todoListUid)));
   const newTodoItem = todoList.addTodoItem(title, description, dueDate, priority, done)
@@ -54,7 +65,7 @@ function updateStorage(todoList) {
   localStorage.setItem(uid, JSON.stringify(todoList.toJSON()))
 }
 
-export { addTodoItem };
+export { addTodoItem, deleteTodoItem };
 
 // SCRIPT:
 const tdl1 = createTodoList('1st project', 'test project to work on');

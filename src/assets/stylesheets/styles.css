@@ -143,7 +143,7 @@ button#new-todo-list {
 /* ########################### Todo Items ##################################### */
 ul.todo-items-container {
   margin: 0;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   padding: 0;
 }
 
@@ -188,12 +188,17 @@ p.due-date {
   /* color: grey; */
 }
 
-.todo-item > .ellipsis {
-  font-size: xx-small;
-  margin-left: 0.3rem;
-  font-variation-settings: 'wght' 300, 'wdth' 150, 'ital' 0;
+.todo-item > .delete-item-btn {
+  font-size: x-small;
+  /* color: rgb(145, 36, 36); */
+  /* opacity: 50%; */
+  margin-left: 0.4rem;
+  height: 0.7rem;
+  line-height: 0;
+  /* border: none; */
+  /* font-variation-settings: 'wght' 100, 'wdth' 100, 'ital' 0; */
   cursor: pointer;
-  
+  padding: 0.3rem;
 }
 
 
@@ -201,10 +206,11 @@ p.due-date {
 li.new-todo-item {
   display: flex;
   margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.7rem;
   width: 100%;
   overflow: hidden;
 }
-
 
 [name="title"] {
   border: none;
@@ -262,7 +268,6 @@ button.new-todo-item-submit {
   background-color: rgb(26, 211, 26);
   opacity: 0.85;
   cursor: pointer;
-
 }
 
 

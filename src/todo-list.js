@@ -58,8 +58,13 @@ class TodoList {
     return newTodoItem;
   }
 
+  setTodoItems(todoItemsArray) {
+    this.#todoItems = todoItemsArray;
+  }
+
   removeTodoItem(todoItem) {
-    this.setTodoItems(this.#todoItems.filter((item) => item !== todoItem))
+    let newTodoItemsArray = this.#todoItems.filter((item) => item.getTitle() !== todoItem.getTitle());
+    this.setTodoItems(newTodoItemsArray)
   }
   
   getTodoItems() {
@@ -72,6 +77,13 @@ class TodoList {
 
   getLastTodoItem() {
     return this.#todoItems[-1];
+  }
+
+  findTodoItem(itemTitle) {
+    if (typeof itemTitle !== 'string' || itemTitle.trim() === '') {
+      throw new Error('Title must be a non-empty string');
+    }
+    return this.getTodoItems().find((item) => item.getTitle() === itemTitle);
   }
 
   toJSON() {

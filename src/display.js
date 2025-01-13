@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { addTodoItem } from './index.js';
+import { addTodoItem, deleteTodoItem } from './index.js';
 import todoItemTemplate from './views/partials/_todo-item.html';
 import todoListTemplate from './views/partials/_todo-list.html';
 import newTodoItemFormTemplate from './views/partials/_new-todo-item-form.html';
@@ -31,7 +31,7 @@ function buildTodoListHtml(todoListObject) {
 
 function buildTodoItemHtml(todoItem) {
   let itemObjectData = {
-    title: todoItem.getTitle(), description: todoItem.getDescription(),
+    parentListUid: todoItem.getParentListUid() ,title: todoItem.getTitle(), description: todoItem.getDescription(),
     dueDate: format(new Date(todoItem.getDueDate()), 'dd.MM.yy'), priority: todoItem.getPriority(),
     done: todoItem.getDone(), parentListUid: todoItem.getParentListUid() 
   }
@@ -66,8 +66,21 @@ function displayTodoItem(todoItem) {
   const parentListItemsContainer
     = document.querySelector(`[data-list-uid="${todoItem.getParentListUid()}"] ul.todo-items-container`);
   const newItemFormLi = parentListItemsContainer.querySelector('.new-todo-item');
-  parentListItemsContainer.insertBefore(newTodoItemEl, newItemFormLi);
+  parentListItemsContainer.insertBefore(newTodoItemEl, newItemFormLi.nextSibling);
+  attachDeleteItemEventListener(newTodoItemEl);
 }
+
+function attachDeleteItemEventListener(todoItemEl) {
+  const deleteBtn = todoItemEl.querySelector('.delete-item-btn');
+  
+  deleteBtn.addEventListener('click', (event) => {
+    const itemTitle = event.target.value;
+    const parentListUid = event.target.parentNode.dataset.parentTodoListUid
+    event.target.parentNode.remove();
+    deleteTodoItem(parentListUid, itemTitle);
+  })
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const newTodoItemForms = document.querySelectorAll('.new-todo-item');

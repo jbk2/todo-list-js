@@ -18,15 +18,11 @@ Clone this repo, change the "name" in package.json, then run `npm install` to in
 ## ToDo's
 - Enable update of todoItem.#done on checkbox click
 - Enable update of todoItem.#title on title click
-- Add delete todoItem button
 
 - Create #updateTodoList() - to update either list or listItems:
+  (update priority, title (list & item), due date, done, list description)
   - must update localStorage object
   - must re-render the updated list
-
-- Add a delete todoItem button to each todoItem:
-  - must remove the item from the list in the Dom
-  - must remove the item from the list in localStorage
 
 - Add a delete todoList button
   - must remove the list from the Dom
@@ -38,6 +34,8 @@ Clone this repo, change the "name" in package.json, then run `npm install` to in
 - Enable expansion of todoItem, by clicking on todoItem title.
 
 ## Imminent ToDo's
-- refactor tidy & shorten index.js
-- write event listener for add new todoItem and complete that functionality
+- Add delete todoItem button
+  - Add a delete todoItem button to each todoItem:
+    - must remove the item from the list in the Dom
+    - must remove the item from the list in localStorage
 - write event listener for add new todoList and complete that functionality
