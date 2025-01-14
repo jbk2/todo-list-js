@@ -82,17 +82,16 @@ function attachDeleteItemEventListener(todoItemEl) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const newTodoItemForms = document.querySelectorAll('.new-todo-item');
+  const newTodoItemForms = document.querySelectorAll('.new-todo-item-form');
 
   newTodoItemForms.forEach((form) => {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      const formData = new FormData(event.target);
-      const parentTodoListUid = formData.get('parent-todo-list-uid');
-      const itemTitle = formData.get('title');
+      const parentTodoListUid = form['parent-todo-list-uid'].value;
+      const itemTitle = form['title'].value;
+      const itemDueDate = form['due-date'].value;
+      const itemPriority = form['priority'].checked;
       const itemDescription = '';
-      const itemDueDate = formData.get('due-date');
-      const itemPriority = formData.has('priority') ? true : false;
       const itemDone = false;
 
       addTodoItem(parentTodoListUid, itemTitle, itemDescription, itemDueDate, itemPriority, itemDone);
