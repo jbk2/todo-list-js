@@ -99,17 +99,6 @@ main {
   margin-top: 0.8rem;
 }
 
-button#add-todo-list {
-  border: 1px solid green;
-  margin-left: 1.2rem;
-  border-radius: 0.5rem;
-  width: 2.2rem;
-  font-size: x-large;
-  background-color: rgb(26, 211, 26);
-  cursor: pointer;
-  opacity: 0.8;
-}
-
 .todo-list-card {
   background-color: white;
   padding: 1rem;
@@ -279,6 +268,17 @@ button.new-item-submit-btn {
 
 
 /* ########################### New Todo List Modal ##################################### */
+button#add-todo-list-modal {
+  border: 1px solid green;
+  margin-left: 1.2rem;
+  border-radius: 0.5rem;
+  width: 2.2rem;
+  font-size: x-large;
+  background-color: rgb(26, 211, 26);
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 #new-list-dialog {
   position: relative;
   border: 1px solid rgba(61, 115, 61, 0.728);
@@ -315,6 +315,7 @@ form#new-todo-list-form input {
 form#new-todo-list-form input::placeholder {
   font-family: 'anybody';
   font-variation-settings: 'wght' 400, 'wdth' 100, 'ital' 100;
+  opacity: 70%;
 }
 
 form#new-todo-list-form input[name="title"] {
@@ -326,7 +327,14 @@ form#new-todo-list-form input[name="description"] {
 }
 
 form#new-todo-list-form button {
-  margin-top: 1rem;;
+  border: 1px solid green;
+  border-radius: 0.2rem;
+  background-color: rgb(26, 211, 26);
+  font-family: 'anybody';
+  font-variation-settings: 'wght' 500, 'wdth' 100, 'ital' 0;
+  font-size: medium;
+  margin-top: 1rem;
   margin-left: auto;
+  padding: 0.5rem;
   /* align-items: center; */
 }

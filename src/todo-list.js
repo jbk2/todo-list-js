@@ -14,8 +14,8 @@ class TodoList {
     this.setUid(uid);
   }
 
-  setCreationDate(creationDate = new Date()) {
-    this.#creationDate = creationDate;
+  setCreationDate() {
+    this.#creationDate = new Date();
   }
   
   getCreationDate() {

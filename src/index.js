@@ -19,12 +19,13 @@ function createTodoList(title, description) {
   do {
     uid = `todoList:${uuidv7()}`;
   } while(todoListUids.has(uid));
-
+  
   try {
     const newTodoList = new TodoList(title, description, uid);
     saveTodoList(newTodoList);
     todoListUids.add(uid);
-    display.displayTodoList(newTodoList)
+    display.displayTodoList(newTodoList);
+    display.addTodoListEventListener(newTodoList);
     return newTodoList;
   } catch (error) {
     console.error('Error creating and saving TodoList', error);
@@ -61,7 +62,7 @@ function updateStorage(todoList) {
   localStorage.setItem(uid, JSON.stringify(todoList.toJSON()))
 }
 
-export { addTodoItem, deleteTodoItem, deleteTodoList };
+export { createTodoList, addTodoItem, deleteTodoItem, deleteTodoList };
 
 // SCRIPT:
 const tdl1 = createTodoList('1st project', 'test project to work on');
