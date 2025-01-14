@@ -94,6 +94,7 @@ main {
 
 #todo-lists-container {
   display: flex;
+  align-items: flex-start;
   gap: 1rem;
   margin-top: 0.8rem;
 }
@@ -190,15 +191,13 @@ p.due-date {
 
 .todo-item > .delete-item-btn {
   font-size: x-small;
-  /* color: rgb(145, 36, 36); */
-  /* opacity: 50%; */
   margin-left: 0.4rem;
+  margin-bottom: 0.1rem;
   height: 0.7rem;
   line-height: 0;
-  /* border: none; */
-  /* font-variation-settings: 'wght' 100, 'wdth' 100, 'ital' 0; */
-  cursor: pointer;
   padding: 0.3rem;
+  padding-bottom: 0.4rem;
+  cursor: pointer;
 }
 
 

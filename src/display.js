@@ -81,7 +81,6 @@ function attachDeleteItemEventListener(todoItemEl) {
   })
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
   const newTodoItemForms = document.querySelectorAll('.new-todo-item');
 
