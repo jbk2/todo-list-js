@@ -117,6 +117,14 @@ button#new-todo-list {
   border-radius: 1rem;
   width: 14rem;
   max-height: 30rem;
+  position: relative;
+}
+
+.delete-todo-list-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.6rem;
+  cursor: pointer;
 }
 
 .todo-list-card > p,
@@ -204,17 +212,17 @@ p.due-date {
 /* ########################### New Todo Item Form ##################################### */
 li.new-todo-item {
   display: flex;
-  margin-right: 1rem;
+  /* margin-right: 0.5rem; */
   margin-top: 0.5rem;
   margin-bottom: 0.7rem;
-  width: 100%;
-  overflow: hidden;
+  /* width: 100%; */
+  /* overflow: hidden; */
 }
 
 [name="title"] {
   border: none;
   border-bottom: 1px dotted gray;
-  width: 68%;
+  width: 9.34rem;
   font-family: 'anybody';
   font-variation-settings: 'wght' 400, 'wdth' 100, 'ital' 0;
   opacity: 0.7;
