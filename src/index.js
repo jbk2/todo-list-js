@@ -19,7 +19,7 @@ function createTodoList(title, description) {
   do {
     uid = `todoList:${uuidv7()}`;
   } while(todoListUids.has(uid));
-  
+
   try {
     const newTodoList = new TodoList(title, description, uid);
     saveTodoList(newTodoList);
@@ -65,6 +65,10 @@ function updateStorage(todoList) {
 export { createTodoList, addTodoItem, deleteTodoItem, deleteTodoList };
 
 // SCRIPT:
+
+
+// load and render any localStorage todoLists
+
 const tdl1 = createTodoList('1st project', 'test project to work on');
 addTodoItem(tdl1.getUid(), "Eggs", "basdf", "2025-12-31", true, false);
 addTodoItem(tdl1.getUid(), "Bacon", "basdf", "2025-11-27", false, true);

@@ -24,18 +24,15 @@ Clone this repo, change the "name" in package.json, then run `npm install` to in
   - must update localStorage object
   - must re-render the updated list
 
-- Add a delete todoList button
-  - must remove the list from the Dom
-  - must remove the list from localStorage
-
 - Add a clickable list title index in sidebar
 
 - Build a full list modal view, accessible by clicking on list body.
 - Enable expansion of todoItem, by clicking on todoItem title.
 
 ## Imminent ToDo's
-- Add delete todoItem button
-  - Add a delete todoItem button to each todoItem:
-    - must remove the item from the list in the Dom
-    - must remove the item from the list in localStorage
-- write event listener for add new todoList and complete that functionality
+- Adapt logic to load lists from localStorage:
+  - Load lists from localStorage
+  - build html from lists
+  - render html
+
+

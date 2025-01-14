@@ -33,7 +33,7 @@ function buildTodoItemHtml(todoItem) {
   let itemObjectData = {
     parentListUid: todoItem.getParentListUid() ,title: todoItem.getTitle(), description: todoItem.getDescription(),
     dueDate: format(new Date(todoItem.getDueDate()), 'dd.MM.yy'), priority: todoItem.getPriority(),
-    done: todoItem.getDone(), parentListUid: todoItem.getParentListUid() 
+    done: todoItem.getDone()
   }
   let populatedItemHtml = todoItemTemplate
 
@@ -67,10 +67,6 @@ function displayTodoItem(todoItem) {
     = document.querySelector(`[data-list-uid="${todoItem.getParentListUid()}"] ul.todo-items-container`);
   const newItemFormLi = parentListItemsContainer.querySelector('.new-todo-item');
   parentListItemsContainer.insertBefore(newTodoItemEl, newItemFormLi.nextSibling);
-}
-
-function showNewTodoListDialogue() {
-
 }
 
 function addTodoListEventListener(todoList) {
