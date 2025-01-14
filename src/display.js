@@ -69,6 +69,10 @@ function displayTodoItem(todoItem) {
   parentListItemsContainer.insertBefore(newTodoItemEl, newItemFormLi.nextSibling);
 }
 
+function showNewTodoListDialogue() {
+
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const todoLists = document.querySelectorAll('.todo-list-card');
   
@@ -103,6 +107,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     })
+  })
+
+  const addTodoListBtn = document.getElementById('add-todo-list');
+  const newListDialog = document.getElementById('new-list-dialog');
+  const closeDialogBtn = document.getElementById('close-dialog-btn');
+  addTodoListBtn.addEventListener('click', ()=> {
+    newListDialog.showModal();
+  })
+  closeDialogBtn.addEventListener('click', ()=> {
+    newListDialog.close();
   })
 })
 

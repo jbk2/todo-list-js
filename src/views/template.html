@@ -20,11 +20,18 @@
       <section id="content">
         <div id="content-header">
           <h2 id="content-title">Your Todo Lists</h2>
-          <button id="new-todo-list" title="Create new TodoList">+</button>
+          <button id="add-todo-list" title="Create new TodoList">+</button>
+          <dialog id="new-list-dialog">
+            <h3>New TodoList</h3>
+            <button id="close-dialog-btn">x</button>
+            <form action="#" id="new-todo-list-form">
+              <input type="text" name="title" placeholder="title here">
+              <input type="text" name="description" placeholder="description here">
+              <button type="submit" method="dialog">create</button>
+            </form>
+          </dialog>
         </div>
         <section id="todo-lists-container">
-          
-          
         
         </section>
       

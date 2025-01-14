@@ -99,7 +99,7 @@ main {
   margin-top: 0.8rem;
 }
 
-button#new-todo-list {
+button#add-todo-list {
   border: 1px solid green;
   margin-left: 1.2rem;
   border-radius: 0.5rem;
@@ -219,7 +219,7 @@ li.new-todo-item {
   /* overflow: hidden; */
 }
 
-[name="title"] {
+form.new-todo-item-form input[name="title"] {
   border: none;
   border-bottom: 1px dotted gray;
   width: 9.34rem;
@@ -228,7 +228,7 @@ li.new-todo-item {
   opacity: 0.7;
 }
 
-[name="title"]::placeholder {
+form.new-todo-item-form input[name="title"]::placeholder {
   font-family: 'anybody';
   font-variation-settings: 'wght' 400, 'wdth' 100, 'ital' 100;
 }
@@ -278,4 +278,55 @@ button.new-item-submit-btn {
 }
 
 
+/* ########################### New Todo List Modal ##################################### */
+#new-list-dialog {
+  position: relative;
+  border: 1px solid rgba(61, 115, 61, 0.728);
+  border-radius: 1rem;
+  width: max-content;
+}
 
+#new-list-dialog h3 {
+  margin: 0.7rem 0;
+  text-align: center;
+}
+
+#close-dialog-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem
+}
+
+form#new-todo-list-form {
+  display: flex;
+  flex-direction: column;
+}
+
+form#new-todo-list-form input {
+  border: none;
+  border-bottom: 1px dotted gray;
+  font-family: 'anybody';
+  font-variation-settings: 'wght' 400, 'wdth' 100, 'ital' 0;
+  line-height: 1.2rem;
+  display: block;
+  margin: 0.5rem 0;
+}
+
+form#new-todo-list-form input::placeholder {
+  font-family: 'anybody';
+  font-variation-settings: 'wght' 400, 'wdth' 100, 'ital' 100;
+}
+
+form#new-todo-list-form input[name="title"] {
+  width: 10rem;;
+}
+
+form#new-todo-list-form input[name="description"] {
+  width: 15rem;
+}
+
+form#new-todo-list-form button {
+  margin-top: 1rem;;
+  margin-left: auto;
+  /* align-items: center; */
+}
