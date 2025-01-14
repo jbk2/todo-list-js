@@ -120,7 +120,7 @@ button#new-todo-list {
   position: relative;
 }
 
-.delete-todo-list-btn {
+.delete-list-btn {
   position: absolute;
   top: 0.5rem;
   right: 0.6rem;
@@ -266,7 +266,7 @@ input.new-todo-item-due-date {
   width: 100vw;
 }
 
-button.new-todo-item-submit {
+button.new-item-submit-btn {
   border: 1px solid green;
   margin-left: 0.3rem;
   border-radius: 0.2rem;

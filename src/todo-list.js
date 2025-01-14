@@ -83,7 +83,8 @@ class TodoList {
     if (typeof itemTitle !== 'string' || itemTitle.trim() === '') {
       throw new Error('Title must be a non-empty string');
     }
-    return this.getTodoItems().find((item) => item.getTitle() === itemTitle);
+    const foundItem = this.getTodoItems().find((item) => item.getTitle() === itemTitle);
+    return foundItem
   }
 
   toJSON() {

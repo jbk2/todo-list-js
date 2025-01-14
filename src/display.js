@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { addTodoItem, deleteTodoItem } from './index.js';
+import { addTodoItem, deleteTodoItem, deleteTodoList } from './index.js';
 import todoItemTemplate from './views/partials/_todo-item.html';
 import todoListTemplate from './views/partials/_todo-list.html';
 import newTodoItemFormTemplate from './views/partials/_new-todo-item-form.html';
@@ -67,38 +67,43 @@ function displayTodoItem(todoItem) {
     = document.querySelector(`[data-list-uid="${todoItem.getParentListUid()}"] ul.todo-items-container`);
   const newItemFormLi = parentListItemsContainer.querySelector('.new-todo-item');
   parentListItemsContainer.insertBefore(newTodoItemEl, newItemFormLi.nextSibling);
-  attachDeleteItemEventListener(newTodoItemEl);
-}
-
-function attachDeleteItemEventListener(todoItemEl) {
-  const deleteBtn = todoItemEl.querySelector('.delete-item-btn');
-  
-  deleteBtn.addEventListener('click', (event) => {
-    const itemTitle = event.target.value;
-    const parentListUid = event.target.parentNode.dataset.parentTodoListUid
-    event.target.parentNode.remove();
-    deleteTodoItem(parentListUid, itemTitle);
-  })
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const newTodoItemForms = document.querySelectorAll('.new-todo-item-form');
-
-  newTodoItemForms.forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const parentTodoListUid = form['parent-todo-list-uid'].value;
-      const itemTitle = form['title'].value;
-      const itemDueDate = form['due-date'].value;
-      const itemPriority = form['priority'].checked;
-      const itemDescription = '';
-      const itemDone = false;
-
-      addTodoItem(parentTodoListUid, itemTitle, itemDescription, itemDueDate, itemPriority, itemDone);
-      event.target.reset();
+  const todoLists = document.querySelectorAll('.todo-list-card');
+  
+  todoLists.forEach((todoList) => {
+    todoList.addEventListener('click', (event) => {
+      switch (true) {
+        case event.target.matches('.delete-list-btn'): {
+          const listUid = event.target.parentNode.dataset.listUid
+          event.target.parentNode.remove();
+          deleteTodoList(listUid);
+          console.log('This todoList was fully deleted', listUid)
+          break;
+        }
+        case event.target.matches('.new-item-submit-btn'): {
+          event.preventDefault();
+          const form = event.target.parentNode; const parentTodoListUid = form['parent-todo-list-uid'].value;
+          const itemTitle = form['title'].value; const itemDueDate = form['due-date'].value;
+          const itemPriority = form['priority'].checked; const itemDescription = '';
+          const itemDone = false;
+          const newTodoItem = addTodoItem(parentTodoListUid, itemTitle, itemDescription, itemDueDate, itemPriority, itemDone);
+          console.log('This todoItem was added', newTodoItem)
+          form.reset();
+          break;
+        }
+        case event.target.matches('.delete-item-btn'): {
+          const itemTitle = event.target.value;
+          const parentListUid = event.target.parentNode.dataset.parentTodoListUid
+          event.target.parentNode.remove();
+          deleteTodoItem(parentListUid, itemTitle);
+          console.log('This todoItem was fully deleted', parentListUid, ' => ' ,  itemTitle)
+          break;
+        }
+      }
     })
   })
-
 })
 
 export const display = { buildTodoListHtml, buildTodoItemHtml, displayTodoList, displayTodoItem };
