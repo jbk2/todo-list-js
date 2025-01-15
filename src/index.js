@@ -14,10 +14,12 @@ window.createTodoList = createTodoList;
 window.saveTodoList = saveTodoList;
 window.addTodoItem = addTodoItem;
 
+// #################### List functions ###########################
 const todoListUids = new Set();
 
 function createTodoList(title, description) {
   let uid;
+  
   do {
     uid = `todoList:${uuidv7()}`;
   } while(todoListUids.has(uid));
@@ -42,6 +44,15 @@ function deleteTodoList(todoListUid) {
   Storage.delete(todoListUid)
 }
 
+// #################### Item functions ###########################
+function addTodoItem(todoListUid, title, description, dueDate, priority, done) {
+  const todoList = TodoList.fromJSON(Storage.load(todoListUid));
+  const newTodoItem = todoList.addTodoItem(title, description, dueDate, priority, done)
+  Storage.save(todoList.getUid(), todoList.toJSON())
+  UIController.renderTodoItem(newTodoItem)
+  return newTodoItem
+}
+
 function deleteTodoItem(parentUid, itemTitle) {
   const todoList = TodoList.fromJSON(Storage.load(parentUid));
   const todoItem = todoList.findTodoItem(itemTitle)
@@ -49,19 +60,8 @@ function deleteTodoItem(parentUid, itemTitle) {
   saveTodoList(todoList);
 }
 
-function addTodoItem(todoListUid, title, description, dueDate, priority, done) {
-  const todoList = TodoList.fromJSON(Storage.load(todoListUid));
-  const newTodoItem = todoList.addTodoItem(title, description, dueDate, priority, done)
-  updateStorage(todoList);
-  UIController.renderTodoItem(newTodoItem)
-  return newTodoItem
-}
 
-function updateStorage(todoList) {
-  let uid = todoList.getUid();
-  Storage.save(uid, todoList.toJSON())
-}
-
+// #################### Display functions ###########################
 function displayStoredLists() {
   Storage.getAll().forEach((item) => {
     const todoListObj = TodoList.fromJSON(item);
@@ -70,21 +70,23 @@ function displayStoredLists() {
   })
 }
 
-function loadDemoList() {
+function displayDemoList() {
   if (!Storage.getAll().some((list) => list.title === "Acme TodoList")) {
-    buildDemoList()
+    createDemoList()
   }
 }
 
-function buildDemoList() {
+function createDemoList() {
   const tdl1 = createTodoList('Acme TodoList', 'A template todo list just to demonstrate in the UI.');
   addTodoItem(tdl1.getUid(), "Eggs", "good protein", "2025-12-31", true, false);
   addTodoItem(tdl1.getUid(), "Bacon", "tasty", "2025-11-27", false, true);
 }
 
+
+// #################### Initialize app ###########################
 function init() {
   displayStoredLists();
-  loadDemoList();
+  displayDemoList();
 }
 
 export { createTodoList, addTodoItem, deleteTodoItem, deleteTodoList };
