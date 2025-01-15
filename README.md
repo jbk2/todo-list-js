@@ -1,18 +1,25 @@
-_Built & versions up to date from 04.01.25_
+_Built & versions up to date as at 04.01.25_
+
+# Description
+An SPA, simple Todo List application, built with vanilla JS using webpack. A[part](https://www.theodinproject.com/lessons/javascript-todo-list) of The Odin Project's curriculum.
+
+- TodoList & TodoItem constructor classes
+- Program logic in index.js and display logic in display.js
+- Uses partial templating in src/views/partials
+- Uses Webpack to bundle JS, fonts, css
+- Persists data to localStorage
 
 ## Webpack Template - description
+Using Webpack (env. scoped dependencies) & NPM, see webpack.*.js & package.json for details, amongst others these libraries are used:
 
-This is a template webpack project setup with the following packages:
-
-- webpack & webpack-cli: Bundles JavaScript, CSS, and more.
-- html-webpack-plugin: Automatically generates or updates an HTML file to include references to bundled assets.
-- style-loader: Injects CSS into the DOM via <style> tags.
-- css-loader: Resolves @import and url() statements in CSS for Webpack to process.
-- html-loader: Processes HTML files to resolve asset references like images or links.
-- webpack-dev-server: Provides a development server that rebuilds, updates source maps, and refreshes the browser in real time, run `npx webpack serve`.
-
-## Usage
-Clone this repo, change the "name" in package.json, then run `npm install` to install the dependencies.
+- webpack & webpack-cli
+- html-webpack-plugin
+- style-loader
+- css-loader
+- html-loader
+- webpack-dev-server
+- datefns
+- uuid
 
 ## ToDo's
 - Create #updateTodoList() - to update either list or items:
@@ -26,5 +33,3 @@ Clone this repo, change the "name" in package.json, then run `npm install` to in
 - Order todoItems by dueDate
 - Enable expansion of todoItem, by clicking on todoItem title.
 - Split css out into separate files
-
-## Imminent ToDo's
