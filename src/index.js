@@ -3,6 +3,7 @@ import { v7 as uuidv7 } from 'uuid';
 import TodoItem from "./todo-item.js";
 import TodoList from "./todo-list.js";
 import Storage from "./storage-service.js";
+import UIController from "./ui-controller.js";
 import { display } from "./display.js";
 // import './assets/fonts/*'
 // import './assets/images/*'
@@ -25,8 +26,7 @@ function createTodoList(title, description) {
     const newTodoList = new TodoList(title, description, uid);
     saveTodoList(newTodoList);
     todoListUids.add(uid);
-    display.displayTodoList(newTodoList);
-    display.addTodoListEventListener(newTodoList);
+    UIController.renderTodoList(newTodoList);
     return newTodoList;
   } catch (error) {
     console.error('Error creating and saving TodoList', error);
@@ -46,14 +46,14 @@ function deleteTodoItem(parentUid, itemTitle) {
   const todoList = TodoList.fromJSON(Storage.load(parentUid));
   const todoItem = todoList.findTodoItem(itemTitle)
   todoList.removeTodoItem(todoItem);
-  saveTodoList(todoList)
+  saveTodoList(todoList);
 }
 
 function addTodoItem(todoListUid, title, description, dueDate, priority, done) {
   const todoList = TodoList.fromJSON(Storage.load(todoListUid));
   const newTodoItem = todoList.addTodoItem(title, description, dueDate, priority, done)
   updateStorage(todoList);
-  display.displayTodoItem(newTodoItem)
+  UIController.renderTodoItem(newTodoItem)
   return newTodoItem
 }
 
@@ -66,8 +66,7 @@ function displayStoredLists() {
   Storage.getAll().forEach((item) => {
     const todoListObj = TodoList.fromJSON(item);
     todoListUids.add(todoListObj.getUid());
-    display.displayTodoList(todoListObj);
-    display.addTodoListEventListener(todoListObj)
+    UIController.renderTodoList(todoListObj);
   })
 }
 
