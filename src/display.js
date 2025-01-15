@@ -68,28 +68,4 @@ function displayTodoItem(todoItem) {
   parentListItemsContainer.append(newTodoItemEl);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const addListModalBtn = document.getElementById('add-todo-list-modal');
-  const newListModal = document.getElementById('new-list-dialog');
-  const closeModalBtn = document.getElementById('close-dialog-btn');
-  const newListForm = document.querySelector('#new-todo-list-form');
-
-  addListModalBtn.addEventListener('click', ()=> {
-    newListModal.showModal();
-  })
-
-  closeModalBtn.addEventListener('click', ()=> {
-    newListModal.close();
-  })
-
-  newListForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const title = event.target.title.value
-    const description = event.target.description.value
-    createTodoList(title, description)
-    newListModal.close();
-  })
-
-})
-
 export const display = { buildTodoListHtml, buildTodoItemHtml, displayTodoList, displayTodoItem };

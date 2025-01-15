@@ -72,14 +72,10 @@ function displayStoredLists() {
 
 function displayDemoList() {
   if (!Storage.getAll().some((list) => list.title === "Acme TodoList")) {
-    createDemoList()
+    const tdl1 = createTodoList('Acme TodoList', 'A template todo list just to demonstrate in the UI.');
+    addTodoItem(tdl1.getUid(), "Eggs", "good protein", "2025-12-31", true, false);
+    addTodoItem(tdl1.getUid(), "Bacon", "tasty", "2025-11-27", false, true);
   }
-}
-
-function createDemoList() {
-  const tdl1 = createTodoList('Acme TodoList', 'A template todo list just to demonstrate in the UI.');
-  addTodoItem(tdl1.getUid(), "Eggs", "good protein", "2025-12-31", true, false);
-  addTodoItem(tdl1.getUid(), "Bacon", "tasty", "2025-11-27", false, true);
 }
 
 
@@ -87,6 +83,7 @@ function createDemoList() {
 function init() {
   displayStoredLists();
   displayDemoList();
+  UIController.addNewTodoListListener();
 }
 
 export { createTodoList, addTodoItem, deleteTodoItem, deleteTodoList };

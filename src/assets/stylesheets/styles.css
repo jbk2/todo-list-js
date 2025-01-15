@@ -212,7 +212,6 @@ p.due-date {
   cursor: pointer;
 }
 
-
 /* ########################### New Todo Item Form ##################################### */
 li.new-todo-item {
   display: flex;
@@ -325,6 +324,7 @@ form#new-todo-list-form input {
   line-height: 1.2rem;
   display: block;
   margin: 0.5rem 0;
+  padding-left: 0.3rem;
 }
 
 form#new-todo-list-form input::placeholder {
