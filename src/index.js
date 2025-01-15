@@ -62,17 +62,49 @@ function updateStorage(todoList) {
   localStorage.setItem(uid, JSON.stringify(todoList.toJSON()))
 }
 
+function localStorageItems() {
+  const localStorageJSON = [];
+  for (let i = 0; i < localStorage.length;  i++) {
+    localStorageJSON.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
+  }
+  return localStorageJSON;
+}
+
+
+function displayStoredLists() {
+  const localStorageJSON = localStorageItems();
+  
+  localStorageJSON.forEach((item) => {
+    const todoListObj = TodoList.fromJSON(item);
+    todoListUids.add(todoListObj.getUid());
+    display.displayTodoList(todoListObj);
+    display.addTodoListEventListener(todoListObj)
+  })
+}
+
+function loadDemoList() {
+  const localStorageJSON = localStorageItems();
+  const hasAcme = localStorageJSON.some((list) => {
+    return list.title === "Acme TodoList"
+  })
+  if (!hasAcme) { 
+    buildDemoList()
+  }
+}
+
+function buildDemoList() {
+  const tdl1 = createTodoList('Acme TodoList', 'A template todo list just to demonstrate in the UI.');
+  addTodoItem(tdl1.getUid(), "Eggs", "good protein", "2025-12-31", true, false);
+  addTodoItem(tdl1.getUid(), "Bacon", "tasty", "2025-11-27", false, true);
+}
+
+function init() {
+  displayStoredLists();
+  loadDemoList();
+}
+
 export { createTodoList, addTodoItem, deleteTodoItem, deleteTodoList };
 
 // SCRIPT:
+init();
 
-
-// load and render any localStorage todoLists
-
-const tdl1 = createTodoList('1st project', 'test project to work on');
-addTodoItem(tdl1.getUid(), "Eggs", "basdf", "2025-12-31", true, false);
-addTodoItem(tdl1.getUid(), "Bacon", "basdf", "2025-11-27", false, true);
-
-const tdl2 = createTodoList('2nd project', 'another test project to work on');
-// addTodoItem(tdl2.getUid(), "Corn flakes", "basdf", "2025-11-27", false, false);
-// addTodoItem(tdl2.getUid(), "Milk", "basdf", "2025-11-27", false, true);

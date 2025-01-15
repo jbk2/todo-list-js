@@ -54,7 +54,7 @@ function buildTodoItemHtml(todoItem) {
 }
 
 function displayTodoList(todoList) {
-  const listsContainer = document.getElementById('todo-lists-container')
+  const listsContainer = document.getElementById('todo-lists-container');
   listsContainer.insertAdjacentHTML('beforeend', buildTodoListHtml(todoList));
 }
 
@@ -65,8 +65,7 @@ function displayTodoItem(todoItem) {
   const newTodoItemEl = htmlDoc.body.firstElementChild;
   const parentListItemsContainer
     = document.querySelector(`[data-list-uid="${todoItem.getParentListUid()}"] ul.todo-items-container`);
-  const newItemFormLi = parentListItemsContainer.querySelector('.new-todo-item');
-  parentListItemsContainer.insertBefore(newTodoItemEl, newItemFormLi.nextSibling);
+  parentListItemsContainer.append(newTodoItemEl);
 }
 
 function addTodoListEventListener(todoList) {

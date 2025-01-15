@@ -52,13 +52,28 @@ nav {
 #logo-type {
   flex: 1;
   text-align: center;
+  padding-left: 12%;
   font-family: 'kyiv';
   font-variation-settings: "wght" 800, "CONT" 500, "MIDL" -1000;
   font-size: 2.8rem;
 }
 
+#subtitle {
+  font-size: x-small;
+  white-space: nowrap;
+}
+
 #search {
   flex: 0;
+}
+
+#search input {
+  border: none;
+  border-bottom: 1px dotted gray;
+  /* width: 9.34rem; */
+  font-family: 'anybody';
+  font-variation-settings: 'wght' 400, 'wdth' 100, 'ital' 0;
+  opacity: 0.7;
 }
 
 /* ########################### Main ##################################### */

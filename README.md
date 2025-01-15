@@ -14,25 +14,17 @@ This is a template webpack project setup with the following packages:
 ## Usage
 Clone this repo, change the "name" in package.json, then run `npm install` to install the dependencies.
 
-
 ## ToDo's
-- Enable update of todoItem.#done on checkbox click
-- Enable update of todoItem.#title on title click
-
-- Create #updateTodoList() - to update either list or listItems:
+- Create #updateTodoList() - to update either list or items:
   (update priority, title (list & item), due date, done, list description)
   - must update localStorage object
   - must re-render the updated list
-
-- Add a clickable list title index in sidebar
-
-- Build a full list modal view, accessible by clicking on list body.
+- Populate sidebar
+  - clickable list index? 
+  - Items by dueDate?
+- Adjust Item date logic so that if no dueDate selected the field is empty
+- Order todoItems by dueDate
 - Enable expansion of todoItem, by clicking on todoItem title.
+- Split css out into separate files
 
 ## Imminent ToDo's
-- Adapt logic to load lists from localStorage:
-  - Load lists from localStorage
-  - build html from lists
-  - render html
-
-
