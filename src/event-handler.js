@@ -1,11 +1,12 @@
 import { deleteTodoList, addTodoItem, deleteTodoItem } from './index.js';
+import StorageService from './storage-service.js'
 
-export default class EventManager {
+export default class EventHandler {
   static handleDeleteList(event) {
     const listUid = event.target.parentNode.dataset.listUid;
     event.target.parentNode.remove();
+    console.log('This todoList is being fully deleted: =>', StorageService.load(listUid));
     deleteTodoList(listUid);
-    console.log('This todoList was fully deleted', listUid);
   }
 
   static handleAddItem(event) {

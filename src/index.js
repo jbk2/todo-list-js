@@ -83,7 +83,7 @@ function displayDemoList() {
 function init() {
   displayStoredLists();
   displayDemoList();
-  UIController.addNewTodoListListener();
+  UIController.addNewListModalListener();
 }
 
 export { createTodoList, addTodoItem, deleteTodoItem, deleteTodoList };

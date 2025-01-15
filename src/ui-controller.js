@@ -1,30 +1,31 @@
 import { display } from "./display";
-import EventManager from './event-manager';
+import { createTodoList } from './index.js';
+import EventHandler from './event-handler.js';
 class UIController {
   static renderTodoList(todoList) {
     display.displayTodoList(todoList);
-    UIController.addTodoListListener(todoList);
+    UIController.addListListener(todoList);
   }
 
   static renderTodoItem(todoItem) {
     display.displayTodoItem(todoItem);
   }
 
-  static addTodoListListener(todoList) {
+  static addListListener(todoList) {
     const listElement = document.querySelector(`section[data-list-uid="${todoList.getUid()}"]`);
 
     listElement.addEventListener('click', (event) => {
       if (event.target.matches('.delete-list-btn')) {
-        EventManager.handleDeleteList(event);
+        EventHandler.handleDeleteList(event);
       } else if (event.target.matches('.new-item-submit-btn')) {
-        EventManager.handleAddItem(event);
+        EventHandler.handleAddItem(event);
       } else if (event.target.matches('.delete-item-btn')) {
-        EventManager.handleDeleteItem(event);
+        EventHandler.handleDeleteItem(event);
       }
     });
   }
 
-  static addNewTodoListListener() {
+  static addNewListModalListener() {
     const addListModalBtn = document.getElementById('add-todo-list-modal');
     const newListModal = document.getElementById('new-list-dialog');
     const closeModalBtn = document.getElementById('close-dialog-btn');

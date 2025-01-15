@@ -1,5 +1,4 @@
 import { format } from "date-fns";
-import { createTodoList, addTodoItem, deleteTodoItem, deleteTodoList } from './index.js';
 import todoItemTemplate from './views/partials/_todo-item.html';
 import todoListTemplate from './views/partials/_todo-list.html';
 import newTodoItemFormTemplate from './views/partials/_new-todo-item-form.html';
