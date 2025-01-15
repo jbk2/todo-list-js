@@ -18,11 +18,12 @@ module.exports = {
     rules: [
 			{
         test: /\.css$/i,
-				use: ['style-loader','css-loader'],
+        use: ['style-loader', 'css-loader'],
 			},
 			{
         test: /\.html$/i,
-				loader: "html-loader",
+        // include: path.resolve(__dirname, 'src/views/partials'),
+        loader: 'html-loader',
 			},
 			{
         test: /\.(eot|ttf|woff|woff2|otf|png|svg|jpg|jpeg|gif|webp)$/i,

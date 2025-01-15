@@ -1,7 +1,7 @@
 _Built & versions up to date as at 04.01.25_
 
 # Description
-An SPA, simple Todo List application, built with vanilla JS using webpack. A[part](https://www.theodinproject.com/lessons/javascript-todo-list) of The Odin Project's curriculum.
+An SPA, simple Todo List application, built with vanilla JS using webpack. A [part](https://www.theodinproject.com/lessons/javascript-todo-list) of The Odin Project's curriculum.
 
 - TodoList & TodoItem constructor classes
 - Program logic in index.js and display logic in display.js
