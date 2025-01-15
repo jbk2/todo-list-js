@@ -68,42 +68,6 @@ function displayTodoItem(todoItem) {
   parentListItemsContainer.append(newTodoItemEl);
 }
 
-function addTodoListEventListener(todoList) {
-  const uid = todoList.getUid();
-  const listElement = document.querySelector(`section[data-list-uid="${uid}"]`)
-
-  listElement.addEventListener('click', (event) => {
-    switch (true) {
-      case event.target.matches('.delete-list-btn'): {
-        const listUid = event.target.parentNode.dataset.listUid
-        event.target.parentNode.remove();
-        deleteTodoList(listUid);
-        console.log('This todoList was fully deleted', listUid)
-        break;
-      }
-      case event.target.matches('.new-item-submit-btn'): {
-        event.preventDefault();
-        const form = event.target.parentNode; const parentTodoListUid = form['parent-todo-list-uid'].value;
-        const itemTitle = form['title'].value; const itemDueDate = form['due-date'].value;
-        const itemPriority = form['priority'].checked; const itemDescription = '';
-        const itemDone = false;
-        const newTodoItem = addTodoItem(parentTodoListUid, itemTitle, itemDescription, itemDueDate, itemPriority, itemDone);
-        console.log('This todoItem was added', newTodoItem)
-        form.reset();
-        break;
-      }
-      case event.target.matches('.delete-item-btn'): {
-        const itemTitle = event.target.value;
-        const parentListUid = event.target.parentNode.dataset.parentTodoListUid
-        event.target.parentNode.remove();
-        deleteTodoItem(parentListUid, itemTitle);
-        console.log('This todoItem was fully deleted', parentListUid, ' => ' ,  itemTitle)
-        break;
-      }
-    }
-  })
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   const addListModalBtn = document.getElementById('add-todo-list-modal');
   const newListModal = document.getElementById('new-list-dialog');
@@ -128,4 +92,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
-export const display = { buildTodoListHtml, buildTodoItemHtml, displayTodoList, addTodoListEventListener, displayTodoItem };
+export const display = { buildTodoListHtml, buildTodoItemHtml, displayTodoList, displayTodoItem };
