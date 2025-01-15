@@ -2,6 +2,7 @@ import './assets/stylesheets/styles.css'
 import { v7 as uuidv7 } from 'uuid';
 import TodoItem from "./todo-item.js";
 import TodoList from "./todo-list.js";
+import Storage from "./storage-service.js";
 import { display } from "./display.js";
 // import './assets/fonts/*'
 // import './assets/images/*'
@@ -32,25 +33,24 @@ function createTodoList(title, description) {
     throw error
   }
 }
-
 function saveTodoList(newTodoList) {
-  localStorage.setItem(`${newTodoList.getUid()}`, JSON.stringify(newTodoList.toJSON()));
+  Storage.save(`${newTodoList.getUid()}`, newTodoList.toJSON())
 }
 
 function deleteTodoList(todoListUid) {
   todoListUids.delete(todoListUid)
-  localStorage.removeItem(todoListUid)
+  Storage.delete(todoListUid)
 }
 
 function deleteTodoItem(parentUid, itemTitle) {
-  const todoList = TodoList.fromJSON(JSON.parse(localStorage.getItem(parentUid)));
+  const todoList = TodoList.fromJSON(Storage.load(parentUid));
   const todoItem = todoList.findTodoItem(itemTitle)
   todoList.removeTodoItem(todoItem);
   saveTodoList(todoList)
 }
 
 function addTodoItem(todoListUid, title, description, dueDate, priority, done) {
-  const todoList = TodoList.fromJSON(JSON.parse(localStorage.getItem(todoListUid)));
+  const todoList = TodoList.fromJSON(Storage.load(todoListUid));
   const newTodoItem = todoList.addTodoItem(title, description, dueDate, priority, done)
   updateStorage(todoList);
   display.displayTodoItem(newTodoItem)
@@ -59,22 +59,11 @@ function addTodoItem(todoListUid, title, description, dueDate, priority, done) {
 
 function updateStorage(todoList) {
   let uid = todoList.getUid();
-  localStorage.setItem(uid, JSON.stringify(todoList.toJSON()))
+  Storage.save(uid, todoList.toJSON())
 }
-
-function localStorageItems() {
-  const localStorageJSON = [];
-  for (let i = 0; i < localStorage.length;  i++) {
-    localStorageJSON.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
-  }
-  return localStorageJSON;
-}
-
 
 function displayStoredLists() {
-  const localStorageJSON = localStorageItems();
-  
-  localStorageJSON.forEach((item) => {
+  Storage.getAll().forEach((item) => {
     const todoListObj = TodoList.fromJSON(item);
     todoListUids.add(todoListObj.getUid());
     display.displayTodoList(todoListObj);
@@ -83,11 +72,7 @@ function displayStoredLists() {
 }
 
 function loadDemoList() {
-  const localStorageJSON = localStorageItems();
-  const hasAcme = localStorageJSON.some((list) => {
-    return list.title === "Acme TodoList"
-  })
-  if (!hasAcme) { 
+  if (!Storage.getAll().some((list) => list.title === "Acme TodoList")) {
     buildDemoList()
   }
 }
