@@ -1,5 +1,5 @@
 import { display } from "./display";
-import { createTodoList } from './index.js';
+import TodoService from './todo-service.js'
 import EventHandler from './event-handler.js';
 class UIController {
   static renderTodoList(todoList) {
@@ -43,7 +43,8 @@ class UIController {
       event.preventDefault();
       const title = event.target.title.value
       const description = event.target.description.value
-      createTodoList(title, description)
+      display.displayTodoList(TodoService.createTodoList(title, description))
+      newListForm.reset();
       newListModal.close();
     })
   }  
