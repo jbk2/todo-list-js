@@ -1,7 +1,7 @@
 // todo-service.js
 import { v7 as uuidv7 } from 'uuid';
 import Storage from './storage-service';
-import TodoList from './todo-list';
+import TodoList from '../components/todo-list';
 
 export default class TodoService {
   static todoListUids = new Set();

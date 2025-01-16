@@ -1,9 +1,9 @@
 import './assets/stylesheets/styles.css'
 
-import TodoService from './todo-service.js'
-import TodoList from "./todo-list.js";
-import Storage from "./storage-service.js";
-import UIController from "./ui-controller.js";
+import TodoService from './services/todo-service.js'
+import TodoList from "./components/todo-list.js";
+import Storage from "./services/storage-service.js";
+import UIController from "./ui/ui-controller.js";
 // import './assets/fonts/*'
 // import './assets/images/*'
 

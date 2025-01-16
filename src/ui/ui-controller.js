@@ -1,5 +1,5 @@
-import { display } from "./display";
-import TodoService from './todo-service.js'
+import { display } from "./display.js";
+import TodoService from '../services/todo-service.js'
 import EventHandler from './event-handler.js';
 class UIController {
   static renderTodoList(todoList) {
@@ -47,7 +47,7 @@ class UIController {
       newListForm.reset();
       newListModal.close();
     })
-  }  
+  }
 }
 
 export default UIController;

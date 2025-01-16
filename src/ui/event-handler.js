@@ -1,5 +1,5 @@
-import TodoService from './todo-service.js'
-import StorageService from './storage-service.js'
+import TodoService from '../services/todo-service.js'
+import StorageService from '../services/storage-service.js'
 
 export default class EventHandler {
   static handleDeleteList(event) {
