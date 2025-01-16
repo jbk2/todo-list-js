@@ -19,7 +19,7 @@ class TodoItem {
     if (typeof title != 'string' || title.trim() === '') {
       throw new Error('Title must be a non-empty string');
     }
-    // MUST VALIDATE AGAINST SAME TITLE ALREADY IN LOCALSTORAGE
+    // TODO - should validate for uniqueness
     this.#title = title;
   }
   getTitle() {
@@ -76,7 +76,6 @@ class TodoItem {
   getParentListUid() {
     return this.#parentListUid;
   }
-
 
   toJSON() {
     return {

@@ -1,5 +1,6 @@
 import TodoService from '../services/todo-service.js'
 import StorageService from '../services/storage-service.js'
+import { display } from './display.js'
 
 export default class EventHandler {
   static handleDeleteList(event) {
@@ -26,7 +27,9 @@ export default class EventHandler {
       itemPriority,
       itemDone
     );
-    console.log('This todoItem was added', newTodoItem);
+    display.displayTodoItem(newTodoItem);
+    console.log('This todoItem was added & displayed', newTodoItem);
+
     form.reset();
   }
 

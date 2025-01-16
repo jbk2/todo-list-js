@@ -4,6 +4,7 @@ import TodoService from './services/todo-service.js'
 import TodoList from "./components/todo-list.js";
 import Storage from "./services/storage-service.js";
 import UIController from "./ui/ui-controller.js";
+import { display } from './ui/display.js'
 // import './assets/fonts/*'
 // import './assets/images/*'
 
@@ -17,10 +18,15 @@ function displayStoredLists() {
 
 function displayDemoList() {
   if (!Storage.getAll().some((list) => list.title === "Acme TodoList")) {
-    const tdl1 = TodoService.createTodoList('Acme TodoList', 'A template todo list just to demonstrate in the UI.');
-    TodoService.addTodoItem(tdl1.getUid(), "Eggs", "good protein", "2025-12-31", true, false);
-    TodoService.addTodoItem(tdl1.getUid(), "Bacon", "tasty", "2025-11-27", false, true);
-    displayStoredLists();
+    let demoList = TodoService.createTodoList('Acme TodoList', 'A template todo list just to demonstrate in the UI.');
+    const demoListUid = demoList.getUid();
+    
+    TodoService.addTodoItem(demoListUid, "Eggs", "good protein", "2025-12-31", true, false);
+    TodoService.addTodoItem(demoListUid, "Bacon", "tasty", "2025-11-27", false, true);
+    
+    demoList = TodoList.fromJSON(Storage.load(demoListUid))
+    display.displayTodoList(demoList);
+    UIController.addListListener(demoList)
   }
 }
 

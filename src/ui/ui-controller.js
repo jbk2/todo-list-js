@@ -43,7 +43,9 @@ class UIController {
       event.preventDefault();
       const title = event.target.title.value
       const description = event.target.description.value
-      display.displayTodoList(TodoService.createTodoList(title, description))
+      const newList = TodoService.createTodoList(title, description)
+      display.displayTodoList(newList)
+      UIController.addListListener(newList)
       newListForm.reset();
       newListModal.close();
     })
