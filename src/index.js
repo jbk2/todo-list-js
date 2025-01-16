@@ -20,12 +20,14 @@ function displayDemoList() {
   if (!Storage.getAll().some((list) => list.title === "Acme TodoList")) {
     let demoList = TodoService.createTodoList('Acme TodoList', 'A template todo list just to demonstrate in the UI.');
     const demoListUid = demoList.getUid();
-    
+
     TodoService.addTodoItem(demoListUid, "Eggs", "good protein", "2025-12-31", true, false);
     TodoService.addTodoItem(demoListUid, "Bacon", "tasty", "2025-11-27", false, true);
     
     demoList = TodoList.fromJSON(Storage.load(demoListUid))
-    display.displayTodoList(demoList);
+    // insert demoList as first list
+    const listsContainer = document.getElementById('todo-lists-container');
+    listsContainer.insertAdjacentHTML('afterbegin', display.buildTodoListHtml(demoList));
     UIController.addListListener(demoList)
   }
 }
