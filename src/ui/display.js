@@ -1,7 +1,7 @@
 import { format } from "date-fns";
-import todoItemTemplate from './views/partials/_todo-item.html';
-import todoListTemplate from './views/partials/_todo-list.html';
-import newTodoItemFormTemplate from './views/partials/_new-todo-item-form.html';
+import todoItemTemplate from '../views/partials/_todo-item.html';
+import todoListTemplate from '../views/partials/_todo-list.html';
+import newTodoItemFormTemplate from '../views/partials/_new-todo-item-form.html';
 window.buildTodoListHtml = buildTodoListHtml;
 
 function buildTodoListHtml(todoListObject) {
