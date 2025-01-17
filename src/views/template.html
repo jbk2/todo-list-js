@@ -27,8 +27,10 @@
           <dialog id="new-list-dialog">
             <h3>New TodoList</h3>
             <button id="close-dialog-btn">x</button>
-            <form action="#" id="new-todo-list-form">
-              <input type="text" name="title" placeholder="title here" autofocus>
+            <form action="#" id="new-todo-list-form" novalidate>
+              <input type="text" name="title" placeholder="title here"
+                minlength="4" maxlength="20" pattern="[A-Za-z0-9 @,.'\/!?£$%]+" autofocus>
+              <span id="title-error" class="error"></span>
               <input type="text" name="description" placeholder="description here">
               <button type="submit" method="dialog">create</button>
             </form>

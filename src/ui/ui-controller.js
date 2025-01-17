@@ -30,25 +30,79 @@ class UIController {
     const newListModal = document.getElementById('new-list-dialog');
     const closeModalBtn = document.getElementById('close-dialog-btn');
     const newListForm = document.querySelector('#new-todo-list-form');
-
-    addListModalBtn.addEventListener('click', ()=> {
+    const newListTitleInput = newListForm.querySelector('input[name="title"]');
+    const newListTitleError = newListForm.querySelector('span#title-error');
+    let validationEnabled = false;
+  
+    // Open modal
+    addListModalBtn.addEventListener('click', () => {
+      resetFormState();
       newListModal.showModal();
-    })
-    
-    closeModalBtn.addEventListener('click', ()=> {
+    });
+  
+    // Close modal
+    closeModalBtn.addEventListener('click', () => {
+      resetFormState();
       newListModal.close();
-    })
-    
+    });
+  
+    // Form submission handler
     newListForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      const title = event.target.title.value
-      const description = event.target.description.value
-      const newList = TodoService.createTodoList(title, description)
-      display.displayTodoList(newList)
-      UIController.addListListener(newList)
+      validationEnabled = true;
+  
+      if (validate(event.target.title)) {
+        const title = event.target.title.value;
+        const description = event.target.description.value;
+        const newList = TodoService.createTodoList(title, description);
+        display.displayTodoList(newList);
+        UIController.addListListener(newList);
+        resetFormState();
+        newListModal.close();
+      }
+    });
+  
+    // Input handler
+    newListTitleInput.addEventListener('input', (event) => {
+      if (validationEnabled) {
+        validate(event.target);
+      }
+    });
+  
+    // Validate input and show/hide error messages
+    function validate(element) {
+      if (element.validity.valid) {
+        clearError(); // Clear error if input is valid
+        return true;
+      } else {
+        if (element.validity.valueMissing) {
+          newListTitleError.textContent = "You must enter a value.";
+        } else if (element.validity.tooShort) {
+          newListTitleError.textContent = "You must enter more than 4 characters.";
+        } else if (element.validity.tooLong) {
+          newListTitleError.textContent = "You must enter less than 20 characters.";
+        } else if (element.validity.patternMismatch) {
+          newListTitleError.textContent =
+            "You must enter alphanumeric chars or any of these; @,.'\\/!?£$%.";
+        }
+        newListTitleError.className = "error active";
+        return false;
+      }
+    }
+  
+    // Clear error messages
+    function clearError() {
+      newListTitleError.textContent = "";
+      newListTitleError.className = "error";
+    }
+  
+    // Reset form state
+    function resetFormState() {
+      validationEnabled = false;
       newListForm.reset();
-      newListModal.close();
-    })
+      clearError();
+      newListTitleInput.value = "";
+    }
   }
 }
 

@@ -1,8 +1,9 @@
 <li class="new-todo-item">
-  <form action="#" class="new-todo-item-form" novalidate>
+  <form action="#" class="new-todo-item-form">
     <input type="hidden" name="parent-todo-list-uid" value="{{uid}}">
     <input type="text" name="title" placeholder="new Todo Item title"
-      minlength="4" pattern="[A-Za-z0-9 @,.'\/!?£$%]+" title="Please enter only alphabetic characters."required>
+      minlength="2"  maxlength="20" pattern="[A-Za-z0-9 @,.'\/!?£$%]+"
+      title="Please enter only alphabetic characters."required>
     <label class="checkbox-container" title="Priority item?">
       <input type="checkbox" id="new-todo-item-done"  name="priority">
       <span class="checkmark">⭐</span>
