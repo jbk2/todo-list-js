@@ -334,7 +334,21 @@ form#new-todo-list-form input::placeholder {
 }
 
 form#new-todo-list-form input[name="title"] {
-  width: 10rem;;
+  width: 10rem;
+}
+
+form#new-todo-list-form span#title-error.error {
+  visibility: none;
+}
+
+form#new-todo-list-form span#title-error.active {
+  visibility: visible;
+  position: absolute;
+  font-size: x-small;
+  bottom: 8.45rem;
+  font-variation-settings: 'wght' 300, 'wdth' 100, 'ital' 100;
+  color: red;
+  /* overflow: visible; */
 }
 
 form#new-todo-list-form input[name="description"] {
@@ -354,4 +368,4 @@ form#new-todo-list-form button {
   /* align-items: center; */
 }
 
-/*# sourceMappingURL=app.cf2c34d54ab30d7f4102.css.map*/
+/*# sourceMappingURL=app.c2713152716b4bd2d52e.css.map*/
